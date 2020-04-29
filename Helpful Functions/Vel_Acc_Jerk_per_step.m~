@@ -29,33 +29,23 @@ end
 
 %% Create frames of each step to reference
 if rStep_id >= 0
-    rStep_1(:,1) =  rStep_id(1,1):rStep_id(1,2);
-    rStep_2(:,1) =  rStep_id(2,1):rStep_id(2,2);
-    rStep_3(:,1) =  rStep_id(3,1):rStep_id(3,2);
-    rStep_4(:,1) =  rStep_id(4,1):rStep_id(4,2);
-%     rStep_5(:,1) =  rStep_id(5,1):rStep_id(5,2);
-%     rStep_6(:,1) =  rStep_id(6,1):rStep_id(6,2);
-end
+    rStep(:,1)
 
-% for ii = allSteps(:,1)
-%     rStep_first(:,1) =  ii(1,1):ii(2,1);
-%     rStep_second(:,1) = ii(3,1):ii(4,1);
-%     rStep_third(:,1) =  ii(5,1):ii(6,1);
-% end
+for ii = allSteps(:,1)
+    rStep_first(:,1) =  ii(1,1):ii(2,1);
+    rStep_second(:,1) = ii(3,1):ii(4,1);
+    rStep_third(:,1) =  ii(5,1):ii(6,1);
+end
 
 % rTO_HS_frames_firstStep = rTO_HS(1):rTO_HS(2);
 % rTO_HS_frames_secondStep = rTO_HS(3):rTO_HS(4);
 % rTO_HS_frames_thirdStep = rTO_HS(5):rTO_HS(6);
 
-if lStep_id >= 0
-    lStep_1(:,1) =  lStep_id(1,1):lStep_id(1,2);
-    lStep_2(:,1) =  lStep_id(2,1):lStep_id(2,2);
-    lStep_3(:,1) =  lStep_id(3,1):lStep_id(3,2);
-    lStep_4(:,1) =  lStep_id(4,1):lStep_id(4,2);
-%     lStep_5(:,1) =  lStep_id(5,1):lStep_id(5,2);
-%     lStep_6(:,1) =  lStep_id(6,1):lStep_id(6,2);
+for ii = allSteps(:,2)
+    lStep_first =       ii(1,1):ii(2,1);
+    lStep_second =      ii(3,1):ii(4,1);
+    lStep_third =       ii(5,1):ii(6,1);
 end
-
 lTO_HS_frames_firstStep = lTO_HS(1):lTO_HS(2);
 lTO_HS_frames_secondStep = lTO_HS(3):lTO_HS(4);
 lTO_HS_frames_thirdStep = lTO_HS(5):lTO_HS(6);

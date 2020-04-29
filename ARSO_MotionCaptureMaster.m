@@ -4,7 +4,7 @@ clear all
 close all
 
 cd('/Users/MT/Documents/GitHub/COMPhaseSpacePlanning');
-
+rehash
 
 %create method for changing directory to googledrive
 addpath(genpath(cd)) %%add the current folder & subfolders to the path (so Matlab can see the BTK methods)
@@ -91,8 +91,7 @@ for iter = 1:3
 %         [allSteps,step_hs_to_ft_XYZ,peaks,hs_to_ft_Data] = ZeniStepFinder_ccpVid_modified(data_mar_dim_frame, markerLabels,framerate);
 
         %% Vel_Acc_Jerk_per_step
-        [rStep_vel,lStep_vel,rStep_Acc,lStep_Acc,rStep_Jerk,lStep_Jerk] = Vel_Acc_Jerk_per_step(sub01.(trialName).step_TO_HS,sub01.(trialName).RFoot,sub01.(trialName).LFoot);
-
+        [rStep_Acc,lStep_Acc,rStep_Jerk,lStep_Jerk] = Vel_Acc_Jerk_per_step(sub01.(trialName).step_TO_HS,sub01.(trialName),trialName);
 %         FreeWalking.rStep_vel =     rStep_vel;
 %         FreeWalking.lStep_vel =     lStep_vel;
 %         FreeWalking.rStep_Acc =     rStep_Acc;
