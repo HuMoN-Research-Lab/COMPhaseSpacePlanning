@@ -47,7 +47,52 @@ for iter = 1:3
     
     [sub01,trialName] = loadPhaseSpaceMoCapData(fid,condTitle);
 %     trialName = horzcat(condTitle,'_',fid);
-    delete(figure)
+    
+    %% TEST
+    
+    
+    %% calcSegCOM function
+    %Function outputs totalCOM considering marker location
+    [segCenter] = calcPhaseSpaceSegCOM(sub01.(trialName).data_mar_dim_frame,sub01.(trialName).markerLabels,trialName); %,markerID)
+    %STILL HAVENT FIGURED OUT HOW TO DO THIS WITH REGULAR ARRAY!
+    sub01.(trialName).segCenter = segCenter; %{iter}
+    
+    %% calcSegWeightCOM function
+    %Function outputs totalCOM depending on seg weight
+    [totalCOMXYZ] = calcSegWeightCOM(sub01.(trialName).segCenter,segPropWeight);
+    sub01.(trialName).totalCOMXYZ = totalCOMXYZ;
+    %         totalCOMXYZ.(condTitle) = totalCOMXYZ;
+    
+    %% locEmptySegFrames function
+    % Function outputs marker frames evaluation
+    [emptyFrames] = locEmptySegFrames(sub01.(trialName).segCenter,sub01.(trialName).totalCOMXYZ);
+    
+    %% calcMar_Vel_Acc_Jerk function
+    [marVel,marAcc,marJerk,marJerk_squared,LFoot,RFoot] = calcMar_Vel_Acc_Jerk(sub01.(trialName).segCenter,sub01.(trialName).totalCOMXYZ);
+    sub01.(trialName).COMVel =        marVel;
+    sub01.(trialName).COMAcc =        marAcc;
+    sub01.(trialName).COMJerk =       marJerk;
+    sub01.(trialName).LFoot =         LFoot;
+    sub01.(trialName).RFoot =         RFoot;
+    
+    %         %% ZeniStepFinder
+    %         % Identify all heel-toe step locations
+    %         [allSteps,step_hs_to_ft_XYZ,peaks,hs_to_ft_Data] = ZeniStepFinder_ccpVid_modified(data_mar_dim_frame, markerLabels,framerate);
+    
+    %% Vel_Acc_Jerk_per_step
+    [rStep_acc,lStep_acc,rStep_jerk,lStep_jerk] = Vel_Acc_Jerk_per_step(sub01.(trialName).step_TO_HS,sub01.(trialName));
+    %         FreeWalking.rStep_vel =     rStep_vel;
+    %         FreeWalking.lStep_vel =     lStep_vel;
+    %         FreeWalking.rStep_Acc =     rStep_Acc;
+    %         FreeWalking.lStep_Acc =     lStep_Acc;
+    sub01.(trialName).rStep_jerk =    rStep_jerk;
+    sub01.(trialName).lStep_jerk =    lStep_jerk;
+end
+    
+    
+    
+    
+    
 %     sub01.(trialName) = data_mar_dim_frame;
 %     %% Butterworth filter
 %     order   = 4;
@@ -159,7 +204,6 @@ for iter = 1:3
 %         hold on
 %         title('LFoot Jerk')         
         
-    end
  
     if fid == 'trial042' %condTitle == 'Full Vision'
 % % %         processedData.FullVisionData.filteredData =             data_mar_dim_frame;
@@ -356,8 +400,6 @@ for iter = 1:3
 %         title('LFoot Jerk')
         
     end 
-    
-end
 
 %% Plot data
 % figure(6801)

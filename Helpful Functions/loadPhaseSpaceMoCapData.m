@@ -7,7 +7,7 @@ function [sub01,trialName] ... %,numFrames,framerate,markerLabels,data_mar_dim_f
 %% Load file based on fileName
 sub01 = [];
 load([fid '.mat']);
-
+delete(figure)
 %% Structure file name
 fid = erase(fid,'.c3d');
 condTitle = replace(condTitle,' ','_');
