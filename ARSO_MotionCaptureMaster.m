@@ -4,7 +4,6 @@ clear all
 close all
 
 cd('/Users/MT/Documents/GitHub/COMPhaseSpacePlanning');
-rehash
 
 %create method for changing directory to googledrive
 addpath(genpath(cd)) %%add the current folder & subfolders to the path (so Matlab can see the BTK methods)
@@ -48,7 +47,7 @@ for iter = 1:3
     
     [sub01,trialName] = loadPhaseSpaceMoCapData(fid,condTitle);
 %     trialName = horzcat(condTitle,'_',fid);
-    
+    delete(figure)
 %     sub01.(trialName) = data_mar_dim_frame;
 %     %% Butterworth filter
 %     order   = 4;
@@ -91,13 +90,13 @@ for iter = 1:3
 %         [allSteps,step_hs_to_ft_XYZ,peaks,hs_to_ft_Data] = ZeniStepFinder_ccpVid_modified(data_mar_dim_frame, markerLabels,framerate);
 
         %% Vel_Acc_Jerk_per_step
-        [rStep_Acc,lStep_Acc,rStep_Jerk,lStep_Jerk] = Vel_Acc_Jerk_per_step(sub01.(trialName).step_TO_HS,sub01.(trialName),trialName);
+        [rStep_acc,lStep_acc,rStep_jerk,lStep_jerk] = Vel_Acc_Jerk_per_step(sub01.(trialName).step_TO_HS,sub01.(trialName));
 %         FreeWalking.rStep_vel =     rStep_vel;
 %         FreeWalking.lStep_vel =     lStep_vel;
 %         FreeWalking.rStep_Acc =     rStep_Acc;
 %         FreeWalking.lStep_Acc =     lStep_Acc;
-        FreeWalking.rStep_Jerk =    rStep_Jerk;
-        FreeWalking.lStep_Jerk =    lStep_Jerk;
+        sub01.(trialName).rStep_jerk =    rStep_jerk;
+        sub01.(trialName).lStep_jerk =    lStep_jerk;
         
 %         % Plots for velocity, acceleration, and jerk
 %         figure(11)
@@ -116,7 +115,7 @@ for iter = 1:3
 %         plot(FreeWalking.COMJerk,'g-o','MarkerSize',2)
 %         hold on
 %         title('COM Jerk') 
-        
+    end
         %% RFoot calcs and plots
         FreeWalking.RFootVel =      RFoot.marVel;
         FreeWalking.RFootAcc =      RFoot.marAcc;
