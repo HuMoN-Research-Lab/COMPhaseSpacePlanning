@@ -19,17 +19,17 @@ for iter = 1:3
         case 1
             condTitle = 'Free_Walking';
             trialNum = 11;
-            fid = sprintf('trial0%d',trialNum);
+            fileName = sprintf('%d',trialNum);
+            fid = 'trial011';
             
         case 2
             condTitle = 'Full_Vision';
-            trialNum = 42;
-            fid = sprintf('trial0%d',trialNum);
+            
+            fid = 'trial042';
             
         case 3
             condTitle = 'Limited_Vision';
-            trialNum = 15;
-            fid = sprintf('trial0%d',trialNum);
+            fid = 'trial015';
     end
     
     %% Initial conditions
@@ -51,7 +51,7 @@ for iter = 1:3
     [sub01,trialName] = loadPhaseSpaceMoCapData(fid,condTitle);
 %     trialName = horzcat(condTitle,'_',fid);
     
-    %% TEST major script
+    %% TEST
     
     
     %% calcSegCOM function

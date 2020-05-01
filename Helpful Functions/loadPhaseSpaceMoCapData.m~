@@ -4,6 +4,7 @@ function [sub01,trialName] ... %,numFrames,framerate,markerLabels,data_mar_dim_f
 %loadPhaseSpaceMoCapData outputs various variables from the file name 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
 %% Load file based on fileName
 sub01 = [];
 load([fid '.mat']);
