@@ -1,15 +1,15 @@
-function [rStep_acc,lStep_acc,rStep_jerk,lStep_jerk] = Vel_Acc_Jerk_per_step(allSteps,subject_trial)
+function [rStep_acc,lStep_acc,rStep_jerk,lStep_jerk] = Vel_Acc_Jerk_per_step(allSteps,RFoot,LFoot)
 
 %% Formatting of vel,acc,jerk
 %velocity
-rAnkVel2D = subject_trial.RFoot.marVel';
-lAnkVel2D = subject_trial.LFoot.marVel';
+rAnkVel2D =     RFoot.marVel';
+lAnkVel2D =     LFoot.marVel';
 %acceleration
-rAnkAcc2D = subject_trial.RFoot.marAcc';
-lAnkAcc2D = subject_trial.LFoot.marAcc';
+rAnkAcc2D =     RFoot.marAcc';
+lAnkAcc2D =     LFoot.marAcc';
 %jerk
-rAnkJerk2D = subject_trial.RFoot.marAcc;
-lAnkJerk2D = subject_trial.LFoot.marJerk';
+rAnkJerk2D =    RFoot.marJerk_squared';
+lAnkJerk2D =    LFoot.marJerk_squared';
 
 %% Formatting step per foot
 for ii = allSteps(:,3)    
@@ -39,6 +39,8 @@ for ii = 1:numSteps
     rStep_jerk(ii) =    sum(rJerk);
 end
 
+rStep_jerk = sum(rStep_jerk);
+
 %Left foot
 numSteps = length(lStep_id(:,1));
 for ii = 1:numSteps
@@ -50,4 +52,6 @@ for ii = 1:numSteps
     lJerk =             lAnkJerk2D(iterStep);
     lStep_jerk(ii) =    sum(lJerk);
 end
+
+lStep_jerk = sum(lStep_jerk);
 
