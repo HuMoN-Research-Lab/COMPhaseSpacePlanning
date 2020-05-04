@@ -42,7 +42,7 @@ LFoot.marAcc =              diff(LFoot.marVel);
 LFoot.marJerk =             diff(LFoot.marAcc);
 LFoot.marJerk_squared =     (LFoot.marJerk).^2;
 
-%% Old Code using Jons treadmill method 
+%% Old Code
 % RFoot_marVelx =           diff(segCenter.RFootCenter_mar_dim_frame(1,:));
 % RFoot_marVelz =           diff(segCenter.RFootCenter_mar_dim_frame(3,:));
 % RFoot.marVel =            plus(RFoot_marVelx,RFoot_marVelz);
