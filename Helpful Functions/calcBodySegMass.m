@@ -1,8 +1,10 @@
 function [bodySegMass,segPropWeight] = calcBodySegMass(kgMass)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Calculates totalMass of each body segment based on users overall kgMass
+%Prepared based on Miller & Nelson and Lea and Febiger
+%Pages 63-64 in David A. Winters book
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%Establishing output parameters
+%% Establishing output parameters
 bodySegMass = [];
 segPropWeight = [];
 

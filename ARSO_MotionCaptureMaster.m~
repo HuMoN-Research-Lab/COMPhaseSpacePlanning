@@ -69,18 +69,13 @@ for iter = 1:3
     [emptyFrames] = locEmptySegFrames(segCenter,totalCOMXYZ);
     
     %% calcMar_Vel_Acc_Jerk function
+    %function outputs vel,acc, and jerk values for LFoot and RFoot
     [LFoot,RFoot] = calcMar_Vel_Acc_Jerk(segCenter,totalCOMXYZ);
     
     figure(trialNum)
     plot(RFoot.marJerk_abs)
     hold on
     plot(LFoot.marJerk_abs)
-    %PROBABLY DONT NEED THIS
-%     sub01.(trialName).COMVel =        marVel;
-%     sub01.(trialName).COMAcc =        marAcc;
-%     sub01.(trialName).COMJerk =       marJerk;
-%     sub01.(trialName).LFoot =         LFoot;
-%     sub01.(trialName).RFoot =         RFoot;
     
 %         %% ZeniStepFinder
 %         % Identify all heel-toe step locations
@@ -92,7 +87,10 @@ for iter = 1:3
     rJerk(trialNum) =       rFoot_totalJerk;
     lJerk(trialNum) =       lFoot_totalJerk;
     totalJerk(trialNum) =   totalJerk;
-    
+        
+    %% calcReactForces function
+    [reactForces] = calcReactForces(segCenter,segPropWeight,kgMass,RFoot,LFoot);
+        
 end
     
     

@@ -1,6 +1,7 @@
 function [emptyFrames] = locEmptySegFrames(segCenter,totalCOMXYZ)
-%evalSegFrames find the location of the empty cells in a cell array
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%locEmptySegFrames finds location of the empty cells in a cell array
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% headCenter cell array evals
 [row,col] = find(isnan(segCenter.headCenter_mar_dim_frame));
 emptyFrames.headCenter = [col];

@@ -1,6 +1,6 @@
 function [LFoot,RFoot] = calcMar_Vel_Acc_Jerk(segCenter,totalCOMXYZ)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%Function calculates vel,acc,and jerk using segCenter of foot
+%Function calculates vel,acc,and jerk using segCenter of respective foot
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Define initial conditions
 LFoot =   [];
