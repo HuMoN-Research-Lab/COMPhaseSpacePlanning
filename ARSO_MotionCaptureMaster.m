@@ -88,16 +88,9 @@ for iter = 1:3
     lJerk(trialNum) =       lFoot_totalJerk;
     totalJerk(trialNum) =   totalJerk;
         
-    %% calcReactForces function
-    [reactForces] = calcReactForces(segCenter,segPropWeight,kgMass,RFoot,LFoot);
-        
 end
-    
-    
-%%Dont touch above!!!    
-    
 
-%     %% COM calcs and plots
+    %% COM plots
 %         % Plots for velocity, acceleration, and jerk
 %         figure(11)
 %         subplot(1,3,1)
@@ -114,41 +107,7 @@ end
 %         subplot(1,3,3)
 %         plot(FreeWalking.COMJerk,'g-o','MarkerSize',2)
 %         hold on
-%         title('COM Jerk') 
-        
-%         figure(12)
-%         subplot(2,3,1)
-%         plot(FreeWalking.RFootVel,'r-o','MarkerSize',2)
-%         hold on
-%         grid on
-%         title('RFoot Velocity')
-%         
-%         subplot(2,3,2)
-%         plot(FreeWalking.RFootAcc,'b-o','MarkerSize',2)
-%         hold on
-%         title('RFoot Acceleration')
-%         
-%         subplot(2,3,3)
-%         plot(FreeWalking.RFootJerk,'g-o','MarkerSize',2)
-%         hold on
-%         title('RFoot Jerk') 
-        
-        %% LFoot calcs and plots
-%         subplot(2,3,4)
-%         plot(FreeWalking.LFootVel,'r-o','MarkerSize',2)
-%         hold on
-%         grid on
-%         title('LFoot Velocity')
-%         
-%         subplot(2,3,5)
-%         plot(FreeWalking.LFootAcc,'b-o','MarkerSize',2)
-%         hold on
-%         title('LFoot Acceleration')
-%         
-%         subplot(2,3,6)
-%         plot(FreeWalking.LFootJerk,'g-o','MarkerSize',2)
-%         hold on
-%         title('LFoot Jerk')         
+%         title('COM Jerk')         
 
         %% RFoot calcs and plots        
 %         figure(43)
@@ -185,9 +144,7 @@ end
 %         hold on
 %         title('LFoot Jerk')
 
-    
-
-%% Plot data
+%% Plot MoCap data for trial from start to finish
 % figure(6801)
 % 
 % for fr = 1:10:numFrames
@@ -237,21 +194,3 @@ end
 %     
 %    drawnow
 % end
-
-
-
-%% Troubleshooting Section
-% %% loadPhaseSpaceMoCapData function loads Phase Space Planning data
-% fileName = ('trial011');
-% 
-% [numFrames,framerate,markerLabels,data_mar_dim_frame] ... 
-%     = loadPhaseSpaceMoCapData(fileName);
-% 
-% %% calcSegCOM function
-% %Function outputs totalCOM considering marker location
-% [segCenter] = calcPhaseSpaceSegCOM(data_mar_dim_frame,markerLabels); %,markerID)
-% FreeWalking.segCenter = segCenter; %{iter}
-% 
-% %% calcSegWeightCOM function
-% %Function outputs totalCOM depending on seg weight
-% [totalCOMXYZ] = calcSegWeightCOM(segCenter,segPropWeight);
