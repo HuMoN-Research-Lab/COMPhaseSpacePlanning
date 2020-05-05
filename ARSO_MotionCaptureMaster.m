@@ -12,7 +12,7 @@ addpath(genpath(cd)) %%add the current folder & subfolders to the path (so Matla
 
 for iter = 1:3
     % Identify location where files are stored
-    cd('/Users/MT/Google Drive File Stream/My Drive/MotionCaptureProjects/COMPhaseSpacePlanningData/mat files');
+    cd('/Users/MT/Google Drive File Stream/My Drive/MotionCaptureProjects/COMPhaseSpacePlanningData/Data/Sub01/Trials');
 %     addpath(genpath(cd))
     
     switch iter
