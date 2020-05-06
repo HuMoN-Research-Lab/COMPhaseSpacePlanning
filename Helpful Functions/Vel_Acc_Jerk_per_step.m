@@ -1,4 +1,4 @@
-function [rFoot_totalJerk_per_step,rJerk_per_step_frame,lFoot_totalJerk_per_step,lJerk_per_step_frame,totalAnkleJerk_per_step] = Vel_Acc_Jerk_per_step(step_TO_HS,RFoot,LFoot,totalCOM_calc,numFrames)
+function [totalCOM_totalJerk_per_step,totalAnkleJerk_per_step] = Vel_Acc_Jerk_per_step(step_TO_HS,RFoot,LFoot,totalCOM_calc,numFrames)
 
 %% Formatting of vel,acc,jerk
 %velocity
@@ -14,7 +14,7 @@ totalCOM_acc2D =    totalCOM_calc.marAcc';
 %jerk
 rAnkJerk2D =        RFoot.marJerk_abs';
 lAnkJerk2D =        LFoot.marJerk_abs';
-totalCOM_jerk2D =   totalCOM_calc.marJerk';
+totalCOM_jerk2D =   totalCOM_calc.marJerk_abs';
 
 %% Formatting step per foot and COM
 for ii = step_TO_HS(:,3)    
