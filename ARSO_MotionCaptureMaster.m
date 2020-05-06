@@ -2,35 +2,45 @@
 clc
 clear all
 close all
+if ispc %JSM PC
+    codepath = 'C:\Users\jonma\Dropbox\ResearchProjects\GithubDesktop_DontEdit\COMPhaseSpacePlanning';
+    dataPath = 'C:\Users\jonma\Google Drive\MotionCaptureProjects\COMPhaseSpacePlanningData\Data\Sub01\Trials';
+elseif ismac %MT Mac
+    codePath = '/Users/MT/Documents/GitHub/COMPhaseSpacePlanning';
+    dataPath = '/Users/MT/Google Drive File Stream/My Drive/MotionCaptureProjects/COMPhaseSpacePlanningData/Data/Sub01/mat';
+end
 
-cd('/Users/MT/Documents/GitHub/COMPhaseSpacePlanning');
+cd(codePath)
+    %     cd('/Users/MT/Documents/GitHub/COMPhaseSpacePlanning');
 
 %create method for changing directory to googledrive
 addpath(genpath(cd)) %%add the current folder & subfolders to the path (so Matlab can see the BTK methods)
 
 %% Trial calc for loop
 
-for iter = 1:3
+for trialNum = 11:11
     % Identify location where files are stored
     cd('/Users/MT/Google Drive File Stream/My Drive/MotionCaptureProjects/COMPhaseSpacePlanningData/Data/Sub01/Trials');
 %     addpath(genpath(cd))
     
-    switch iter
-        case 1
-            condTitle = 'Free_Walking';
-            trialNum = 11;
-            fid = sprintf('trial0%d',trialNum);
-            
-        case 2
-            condTitle = 'Full_Vision';
-            trialNum = 42;
-            fid = sprintf('trial0%d',trialNum);
-            
-        case 3
-            condTitle = 'Limited_Vision';
-            trialNum = 15;
-            fid = sprintf('trial0%d',trialNum);
-    end
+%     switch trialNum
+%         case 1
+%             condTitle = 'Free_Walking';
+%             trialNum = 11;
+%             fid = sprintf('trial0%d',trialNum);
+%             
+%         case 2
+%             condTitle = 'Full_Vision';
+%             trialNum = 42;
+%             fid = sprintf('trial0%d',trialNum);
+%             
+%         case 3
+%             condTitle = 'Limited_Vision';
+%             trialNum = 15;
+%             fid = sprintf('trial0%d',trialNum);
+%     end
+    
+    fid = [dataPath filesep sprintf('trial%03d',trialNum) '.mat'];
     
     %% Initial conditions
     mmHeight = 1;
@@ -47,8 +57,8 @@ for iter = 1:3
     %% Load data from specific fid
 %     [numFrames,framerate,markerLabels,data_mar_dim_frame,step_TO_HS] ...
 %         = loadPhaseSpaceMoCapData(fid,condTitle);    
-    [sub01,trialName] = loadPhaseSpaceMoCapData(fid,condTitle);
-%     trialName = horzcat(condTitle,'_',fid);
+    [data_mar_dim_frame,markerLabels,numFrames,step_TO_HS] ...
+        = loadPhaseSpaceMoCapData(fid);
     
 %     %% Butterworth filter
 %     order   = 4;
@@ -58,7 +68,7 @@ for iter = 1:3
     
     %% calcSegCOM function
     %Function outputs totalCOM considering marker location
-    [segCenter] = calcPhaseSpaceSegCOM(sub01.(trialName).data_mar_dim_frame,sub01.(trialName).markerLabels,trialName); %,markerID)
+    [segCenter] = calcPhaseSpaceSegCOM(data_mar_dim_frame,markerLabels,trialName); %,markerID)
     
     %% calcSegWeightCOM function
     %Function outputs totalCOM depending on seg weight
