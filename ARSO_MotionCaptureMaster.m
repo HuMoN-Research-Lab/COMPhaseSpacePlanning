@@ -1,7 +1,7 @@
 %ARSO_MotionCaptureMaster
 clc
-clear all
-close all
+% clear all
+% close all
 if ispc %JSM PC
     codepath = 'C:\Users\jonma\Dropbox\ResearchProjects\GithubDesktop_DontEdit\COMPhaseSpacePlanning';
     dataPath = 'C:\Users\jonma\Google Drive\MotionCaptureProjects\COMPhaseSpacePlanningData\Data\Sub01\Trials';
@@ -18,27 +18,9 @@ addpath(genpath(cd)) %%add the current folder & subfolders to the path (so Matla
 
 %% Trial calc for loop
 
-for trialNum = 11:11
+for trialNum = 12:12
     % Identify location where files are stored
     cd('/Users/MT/Google Drive File Stream/My Drive/MotionCaptureProjects/COMPhaseSpacePlanningData/Data/Sub01/Trials');
-%     addpath(genpath(cd))
-    
-%     switch trialNum
-%         case 1
-%             condTitle = 'Free_Walking';
-%             trialNum = 11;
-%             fid = sprintf('trial0%d',trialNum);
-%             
-%         case 2
-%             condTitle = 'Full_Vision';
-%             trialNum = 42;
-%             fid = sprintf('trial0%d',trialNum);
-%             
-%         case 3
-%             condTitle = 'Limited_Vision';
-%             trialNum = 15;
-%             fid = sprintf('trial0%d',trialNum);
-%     end
     
     fid = [dataPath filesep sprintf('trial%03d',trialNum) '.mat'];
     
@@ -57,8 +39,60 @@ for trialNum = 11:11
     %% Load data from specific fid
 %     [numFrames,framerate,markerLabels,data_mar_dim_frame,step_TO_HS] ...
 %         = loadPhaseSpaceMoCapData(fid,condTitle);    
-    [data_mar_dim_frame,markerLabels,numFrames,step_TO_HS] ...
+    [data_mar_dim_frame,markerLabels,numFrames,step_TO_HS,tracker]...
         = loadPhaseSpaceMoCapData(fid);
+    
+    %% Plot MoCap data for trial from start to finish
+figure(trialNum)
+
+for fr = 805:10:1117
+    %Clear current frame
+    clf
+
+    %Plot all markers in x,y, and z
+    plot3(data_mar_dim_frame(:, 1, fr),...
+        data_mar_dim_frame(:, 2, fr),...
+        data_mar_dim_frame(:, 3, fr),'k.','MarkerFaceColor','k')
+    
+    hold on
+%     
+    %% Uncover the unknown marker location
+    plot3(tracker(1,fr),...
+        tracker(2,fr),...
+        tracker(3,fr),'p','DisplayName','STRN');
+% 
+% %     %% Seg Evals in 3D
+% %     %plot of total anatomical COM
+% %     plot3(segCenter.RHandCenter_mar_dim_frame(1,fr),...
+% %         segCenter.RHandCenter_mar_dim_frame(2,fr),...
+% %         segCenter.RHandCenter_mar_dim_frame(3,fr),'p','DisplayName','Next');
+%     
+%     %% Total Body COM in 3D
+%     %plot of total anatomical COM
+%     plot3(totalCOMXYZ(1,fr),...
+%         totalCOMXYZ(2,fr),...
+%         totalCOMXYZ(3,fr),'p','DisplayName','TotalCOMXYZ');
+%     
+    %% Plotting parameters
+    axis equal
+    grid on
+    legend
+    
+    %optimal x y z graph limits 
+    xlim([-1e3 5e3])
+    ylim([-1e3 1e3]) %full lab
+%    ylim([1e3 3e3]) %smaller space
+    zlim([0 3e3])
+    
+    %unsure of what this section XYZs
+    az = -84.362;
+    el =  20.417;
+    view(az,el)
+    
+    
+   drawnow
+end
+    
     
 %     %% Butterworth filter
 %     order   = 4;
@@ -155,8 +189,8 @@ end
 %         hold on
 %         title('LFoot Jerk')
 
-%% Plot MoCap data for trial from start to finish
-% figure(6801)
+% %% Plot MoCap data for trial from start to finish
+% figure(trialNum)
 % 
 % for fr = 1:10:numFrames
 %     %Clear current frame
@@ -168,24 +202,24 @@ end
 %         data_mar_dim_frame(:, 3, fr),'k.','MarkerFaceColor','k')
 %     
 %     hold on
-%     
-%     %% Uncover the unknown marker location
-% %     plot3(unknownID(1,fr),...
-% %         unknownID(2,fr),...
-% %         unknownID(3,fr),'p','DisplayName','RWRB');
-% 
-% %     %% Seg Evals in 3D
+% %     
+% %     %% Uncover the unknown marker location
+% % %     plot3(unknownID(1,fr),...
+% % %         unknownID(2,fr),...
+% % %         unknownID(3,fr),'p','DisplayName','RWRB');
+% % 
+% % %     %% Seg Evals in 3D
+% % %     %plot of total anatomical COM
+% % %     plot3(segCenter.RHandCenter_mar_dim_frame(1,fr),...
+% % %         segCenter.RHandCenter_mar_dim_frame(2,fr),...
+% % %         segCenter.RHandCenter_mar_dim_frame(3,fr),'p','DisplayName','Next');
+% %     
+% %     %% Total Body COM in 3D
 % %     %plot of total anatomical COM
-% %     plot3(segCenter.RHandCenter_mar_dim_frame(1,fr),...
-% %         segCenter.RHandCenter_mar_dim_frame(2,fr),...
-% %         segCenter.RHandCenter_mar_dim_frame(3,fr),'p','DisplayName','Next');
-%     
-%     %% Total Body COM in 3D
-%     %plot of total anatomical COM
-%     plot3(totalCOMXYZ(1,fr),...
-%         totalCOMXYZ(2,fr),...
-%         totalCOMXYZ(3,fr),'p','DisplayName','TotalCOMXYZ');
-%     
+% %     plot3(totalCOMXYZ(1,fr),...
+% %         totalCOMXYZ(2,fr),...
+% %         totalCOMXYZ(3,fr),'p','DisplayName','TotalCOMXYZ');
+% %     
 %     %% Plotting parameters
 %     axis equal
 %     grid on
