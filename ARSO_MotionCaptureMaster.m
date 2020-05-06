@@ -80,7 +80,7 @@ for trialNum = 11:11
     
     %% calcMar_Vel_Acc_Jerk function
     %function outputs vel,acc, and jerk values for LFoot and RFoot
-    [LFoot,RFoot] = calcMar_Vel_Acc_Jerk(segCenter,totalCOMXYZ);
+    [LFoot,RFoot,totalCOM_calc] = calcMar_Vel_Acc_Jerk(segCenter,totalCOMXYZ);
     
     figure(trialNum)
     plot(RFoot.marJerk_abs)
@@ -92,11 +92,11 @@ for trialNum = 11:11
 %         [allSteps,step_hs_to_ft_XYZ,peaks,hs_to_ft_Data] = ZeniStepFinder_ccpVid_modified(data_mar_dim_frame, markerLabels,framerate);
     
     %% Vel_Acc_Jerk_per_step
-    [rFoot_totalJerk,rJerk_per_frame,lFoot_totalJerk,lJerk_per_frame,totalJerk] = Vel_Acc_Jerk_per_step(sub01.(trialName).step_TO_HS,RFoot,LFoot);
+    [rFoot_totalJerk,rJerk_per_frame,lFoot_totalJerk,lJerk_per_frame,totalJerk] = Vel_Acc_Jerk_per_step(step_TO_HS,RFoot,LFoot,totalCOM_calc,numFrames);
 
-    rJerk(trialNum) =       rFoot_totalJerk;
-    lJerk(trialNum) =       lFoot_totalJerk;
-    totalJerk(trialNum) =   totalJerk;
+    rJerk_per_trial(trialNum) =       rFoot_totalJerk;
+    lJerk_per_trial(trialNum) =       lFoot_totalJerk;
+    totalJerk_per_trial(trialNum) =   totalJerk;
         
 end
 

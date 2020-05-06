@@ -1,24 +1,25 @@
-function [LFoot,RFoot] = calcMar_Vel_Acc_Jerk(segCenter,totalCOMXYZ)
+function [LFoot,RFoot,totalCOM_calc] = calcMar_Vel_Acc_Jerk(segCenter,totalCOMXYZ)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Function calculates vel,acc,and jerk using segCenter of respective foot
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Define initial conditions
 LFoot =   [];
 RFoot =   [];
+totalCOM_calc = [];
 
 %% COM vel, acc, and jerk calculations
-marVelx =           diff(totalCOMXYZ(1,:));
-marVelz =           diff(totalCOMXYZ(3,:));
-calc_marVel =       plus(marVelx,marVelz);
+marVelx =                           diff(totalCOMXYZ(1,:));
+marVelz =                           diff(totalCOMXYZ(3,:));
+calc_marVel =                       plus(marVelx,marVelz);
 
 %id start and end point of trial
-ind_start_end =     find(calc_marVel > 2);
+ind_start_end =                     find(calc_marVel > 2);
 
 %vel, acc, and jerk calc
-marVel =            calc_marVel(ind_start_end);
-marAcc =            diff(marVel);
-marJerk =           diff(marAcc);
-marJerk_abs =       abs(marJerk);
+totalCOM_calc.marVel =              calc_marVel(ind_start_end);
+totalCOM_calc.marAcc =              diff(totalCOM_calc.marVel);
+totalCOM_calc.marJerk =             diff(totalCOM_calc.marAcc);
+totalCOM_calc.marJerk_abs =         abs(totalCOM_calc.marJerk);
 
 %% RAnkle & LAnkle vel, acc, and jerk calculations
 % locate RFoot and LFoot position at start and end of trial
