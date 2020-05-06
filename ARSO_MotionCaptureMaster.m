@@ -68,7 +68,7 @@ for trialNum = 11:11
     
     %% calcSegCOM function
     %Function outputs totalCOM considering marker location
-    [segCenter] = calcPhaseSpaceSegCOM(data_mar_dim_frame,markerLabels,trialName); %,markerID)
+    [segCenter] = calcPhaseSpaceSegCOM(data_mar_dim_frame,markerLabels); %,markerID)
     
     %% calcSegWeightCOM function
     %Function outputs totalCOM depending on seg weight

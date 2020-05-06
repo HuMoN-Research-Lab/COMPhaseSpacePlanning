@@ -5,7 +5,7 @@ function [data_mar_dim_frame,markerLabels,numFrames,step_TO_HS] ...
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% Load file based on fileName
-sub01 = [];
+% sub01 = [];
 load(fid);
 % load([fid '.mat']);
 close(figure)
@@ -25,12 +25,6 @@ step_TO_HS = step_fr_ft_XYZ;
 % sub01.(trialName).markerLabels = (marNames).';
 % sub01.(trialName).numFrames = endFrame;  % - startFrames;
 % sub01.(trialName).step_TO_HS = step_fr_ft_XYZ;
-
-% startFrames = data.startFrame;
-% endFrames = data.endFrame;
-% framerate = framerate;
-
-% comXYZ = permute(comXYZ,[2,1]);   %load com of points
 
 %% Track data of unspecified marker for trials
 % tracker = 13;

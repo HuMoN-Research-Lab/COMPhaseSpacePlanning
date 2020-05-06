@@ -1,4 +1,4 @@
-function [segCenter] = calcPhaseSpaceSegCOM(data_mar_dim_frame,markerLabels,trialName) %,markerID)
+function [segCenter] = calcPhaseSpaceSegCOM(data_mar_dim_frame,markerLabels) %,markerID)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %calcSegCOM find the center position for each anatomical segment
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -6,7 +6,6 @@ function [segCenter] = calcPhaseSpaceSegCOM(data_mar_dim_frame,markerLabels,tria
 segCenter = [];
 
 %% Head Markers
-%Store markers data into segCenter for the Head
 %Includes: HeadL, HeadTop, HeadR, and HeadFront
 HeadFrontL = getMarker(data_mar_dim_frame,markerLabels,'LFHD');
 HeadFrontR = getMarker(data_mar_dim_frame,markerLabels,'RFHD');
@@ -34,36 +33,31 @@ headPosZ(:,3) =                     HeadBackL(3,:)';
 headPosZ(:,4) =                     HeadBackR(3,:)';
 headPosZ =                          mean(headPosZ,2);
 
-
 %Center location for the Head
 segCenter.headCenter_mar_dim_frame =              (headPosX).';
 segCenter.headCenter_mar_dim_frame(2,:) =         (headPosY).';
 segCenter.headCenter_mar_dim_frame(3,:) =         (headPosZ).';
 
 %% LShoulder Markers
-%Store markers data into segCenter for the LShoulder
-%Includes: LShoulder
+%Includes: LShoulderTop
 LShoulder = getMarker(data_mar_dim_frame,markerLabels,'LSHO');
-% LShoulderBack = getMarker(marker_mar_dim_frame,markerLabels,'LShoulderBack');
 
+%Center location for LShoulder
 segCenter.LShoulderCenter_mar_dim_frame =         LShoulder;
 
 %% RShoulder Markers
-%Store markers data into segCenter for the RShoulder
-%Includes RShoulderTop and RShoulderBack
+%Includes: RShoulderTop
 RShoulder = getMarker(data_mar_dim_frame,markerLabels,'RSHO');
-% RShoulderBack = getMarker(marker_mar_dim_frame,markerLabels,'RShoulderBack');
 
+%Center location for RShoulder
 segCenter.RShoulderCenter_mar_dim_frame =         RShoulder;
 
 %% Chest Markers
-%Store markers data into segCenter for the Chest
 %Includes: Chest, SpineTop, BackL, and BackR
 BackUpper  = getMarker(data_mar_dim_frame,markerLabels,'C7');
 BackLower  = getMarker(data_mar_dim_frame,markerLabels,'T10');
 TorsoUpper = getMarker(data_mar_dim_frame,markerLabels,'CLAV');
 TorsoMid   = getMarker(data_mar_dim_frame,markerLabels,'STRN');
-
 
 %x values located on corresponding column
 chestPosX(:,1) =                 BackLower(1,:)';
@@ -92,7 +86,6 @@ segCenter.chestCenter_mar_dim_frame(2,:) =     (chestPosY).';
 segCenter.chestCenter_mar_dim_frame(3,:) =     (chestPosZ).';
 
 %% LUpperArm Markers
-%Store markers data into segCenter for the LUpperArm
 %Includes: LShoulder and LELB
 LElbowOut = getMarker(data_mar_dim_frame,markerLabels,'LELB');
 
@@ -117,7 +110,6 @@ segCenter.LUpperArmCenter_mar_dim_frame(2,:) =    (LUpperArmPosY).';
 segCenter.LUpperArmCenter_mar_dim_frame(3,:) =    (LUpperArmPosZ).';
 
 %% RUpperArm Markers
-%Store markers data into segCenter for the RUpperArm
 %Includes: RShoulder and RELB
 RElbowOut = getMarker(data_mar_dim_frame,markerLabels,'RELB');
 
@@ -142,8 +134,7 @@ segCenter.RUpperArmCenter_mar_dim_frame(2,:) =    (RUpperArmPosY).';
 segCenter.RUpperArmCenter_mar_dim_frame(3,:) =    (RUpperArmPosZ).';
 
 %% LForearm Markers
-%Store markers data into segCenter for the LForearm
-%Includes: LELB, LWRA, LWRB
+%Includes: LElbowOut, LWristOut, LWristIn
 LWristIn = getMarker(data_mar_dim_frame,markerLabels,'LWRA');
 LWristOut = getMarker(data_mar_dim_frame,markerLabels,'LWRB');
 
@@ -171,7 +162,6 @@ segCenter.LForearmCenter_mar_dim_frame(2,:) =     (LForearmPosY).';
 segCenter.LForearmCenter_mar_dim_frame(3,:) =     (LForearmPosZ).';
 
 %% RForearm Markers
-%Store markers data into segCenter for the RForearm
 %Includes: RElbowOut, RWristOut, RWristIn
 RWristIn = getMarker(data_mar_dim_frame,markerLabels,'RWRA');
 RWristOut = getMarker(data_mar_dim_frame,markerLabels,'RWRB');
@@ -200,7 +190,6 @@ segCenter.RForearmCenter_mar_dim_frame(2,:) =     (RForearmPosY).';
 segCenter.RForearmCenter_mar_dim_frame(3,:) =     (RForearmPosZ).';
 
 %% LHand Markers
-%Store markers data into segCenter for the LHand
 %Includes: LWRA, LWRB, LFIN
 LHandOut = getMarker(data_mar_dim_frame,markerLabels,'LFIN');
 
@@ -228,7 +217,6 @@ segCenter.LHandCenter_mar_dim_frame(2,:) =     (LHandPosY).';
 segCenter.LHandCenter_mar_dim_frame(3,:) =     (LHandPosZ).';
 
 %% RHand Markers
-%Store markers data into segCenter for the RHand
 %Includes: RWRA, RWRB, and RFIN
 RHandOut = getMarker(data_mar_dim_frame,markerLabels,'RFIN');
 
@@ -257,7 +245,6 @@ segCenter.RHandCenter_mar_dim_frame(3,:) =     (RHandPosZ).';
 
 
 %% Hip Markers
-%Store markers data into segCenter for the Hip
 %Includes: LASI and RASI
 WaistLFront = getMarker(data_mar_dim_frame,markerLabels,'LASI');
 WaistRFront = getMarker(data_mar_dim_frame,markerLabels,'RASI');
@@ -283,29 +270,24 @@ segCenter.hipCenter_mar_dim_frame(2,:) =     (hipPosY).';
 segCenter.hipCenter_mar_dim_frame(3,:) =     (hipPosZ).';
 
 %% LThigh Markers
-%Store markers data into segCenter for the LThigh
 %Includes: LASI, LTHI, and LKNE
-% POTENTIAL SOURCE OF ERROR
 LThigh = getMarker(data_mar_dim_frame,markerLabels,'LTHI');
 LKneeOut= getMarker(data_mar_dim_frame,markerLabels,'LKNE');
 
 %x values located on corresponding column
 LThighPosX(:,1) =                 WaistLFront(1,:)';
-% LThighPosX(:,1) =                 WaistLBack(1,:)';
 LThighPosX(:,2) =                 LThigh(1,:)';
 LThighPosX(:,3) =                 LKneeOut(1,:)';
 LThighPosX =                      mean(LThighPosX,2);
 
 %y values located on corresponding column
 LThighPosY(:,1) =                 WaistLFront(2,:)';
-% LThighPosY(:,1) =                 WaistLBack(2,:)';
 LThighPosY(:,2) =                 LThigh(2,:)';
 LThighPosY(:,3) =                 LKneeOut(2,:)';
 LThighPosY =                      mean(LThighPosY,2);
 
 %z values located on corresponding column
 LThighPosZ(:,1) =                 WaistLFront(3,:)';
-% LThighPosZ(:,1) =                 WaistLBack(3,:)';
 LThighPosZ(:,2) =                 LThigh(3,:)';
 LThighPosZ(:,3) =                 LKneeOut(3,:)';
 LThighPosZ =                      mean(LThighPosZ,2);
@@ -316,29 +298,24 @@ segCenter.LThighCenter_mar_dim_frame(2,:) =     (LThighPosY).';
 segCenter.LThighCenter_mar_dim_frame(3,:) =     (LThighPosZ).';
 
 %% RThigh Markers
-%Store markers data into segCenter for the RThigh
 %Includes: RASI, RTHI, and RKNE
-% POTENTIAL SOURCE OF ERROR
 RThigh = getMarker(data_mar_dim_frame,markerLabels,'RTHI');
 RKneeOut= getMarker(data_mar_dim_frame,markerLabels,'RKNE');
 
 %x values located on corresponding column
 RThighPosX(:,1) =                 WaistRFront(1,:)';
-% RThighPosX(:,1) =                 WaistRBack(1,:)';
 RThighPosX(:,2) =                 RThigh(1,:)';
 RThighPosX(:,3) =                 RKneeOut(1,:)';
 RThighPosX =                      mean(RThighPosX,2);
 
 %y values located on corresponding column
 RThighPosY(:,1) =                 WaistRFront(2,:)';
-% RThighPosY(:,1) =                 WaistRBack(2,:)';
 RThighPosY(:,2) =                 RThigh(2,:)';
 RThighPosY(:,3) =                 RKneeOut(2,:)';
 RThighPosY =                      mean(RThighPosY,2);
 
 %z values located on corresponding column
 RThighPosZ(:,1) =                 WaistRFront(3,:)';
-% RThighPosZ(:,1) =                 WaistRBack(3,:)';
 RThighPosZ(:,2) =                 RThigh(3,:)';
 RThighPosZ(:,3) =                 RKneeOut(3,:)';
 RThighPosZ =                      mean(RThighPosZ,2);
@@ -349,7 +326,6 @@ segCenter.RThighCenter_mar_dim_frame(2,:) =     (RThighPosY).';
 segCenter.RThighCenter_mar_dim_frame(3,:) =     (RThighPosZ).';
 
 %% LLeg Markers
-%Store markers data into segCenter for the LLeg
 %Includes: LKNE, LTIB, and LANK
 LShin = getMarker(data_mar_dim_frame,markerLabels,'LTIB');
 LAnkleOut= getMarker(data_mar_dim_frame,markerLabels,'LANK');
@@ -378,7 +354,6 @@ segCenter.LLegCenter_mar_dim_frame(2,:) =     (LLegPosY).';
 segCenter.LLegCenter_mar_dim_frame(3,:) =     (LLegPosZ).';
 
 %% RLeg Markers
-%Store markers data into segCenter for the RLeg
 %Includes: RKNE, RTIB, RANK
 RShin = getMarker(data_mar_dim_frame,markerLabels,'RTIB');
 RAnkleOut= getMarker(data_mar_dim_frame,markerLabels,'RANK');
@@ -407,7 +382,6 @@ segCenter.RLegCenter_mar_dim_frame(2,:) =     (RLegPosY).';
 segCenter.RLegCenter_mar_dim_frame(3,:) =     (RLegPosZ).';
 
 %% LFoot Markers
-%Store markers data into segCenter for the LFoot
 %Includes: LANK, LHEE, and LTOE
 LHeelBack = getMarker(data_mar_dim_frame,markerLabels,'LHEE');
 LForefootOut= getMarker(data_mar_dim_frame,markerLabels,'LTOE');
@@ -436,7 +410,6 @@ segCenter.LFootCenter_mar_dim_frame(2,:) =     (LFootPosY).';
 segCenter.LFootCenter_mar_dim_frame(3,:) =     (LFootPosZ).';
 
 %% RFoot Markers
-%Store markers data into segCenter for the RFoot
 %Includes: RANK, RHEE, and RTOE
 RHeelBack = getMarker(data_mar_dim_frame,markerLabels,'RHEE');
 RForefootOut= getMarker(data_mar_dim_frame,markerLabels,'RTOE');
