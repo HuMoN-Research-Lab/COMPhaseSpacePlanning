@@ -1,4 +1,4 @@
-function [data_mar_dim_frame,markerLabels,numFrames,step_TO_HS,tracker] ...
+function [data_mar_dim_frame,markerLabels,numFrames,step_TO_HS,markerXYZ,bb] ...
     = loadPhaseSpaceMoCapData(fid)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %loadPhaseSpaceMoCapData outputs various variables from the file name 
@@ -25,18 +25,21 @@ numFrames = endFrame;  % - startFrames;
 %acquire steps when trial started depending on the STRM movement
 %use those frames to perform first filter to step_TO_HS
 %next filter out all duplicates
-% for step_TO_HS = step_fr_ft_XYZ
-    
-    
-step_TO_HS = step_fr_ft_XYZ;
-
-% sub01.(trialName).data_mar_dim_frame = data_mar_dim_frame;
-% sub01.(trialName).markerLabels = (marNames).';
-% sub01.(trialName).numFrames = endFrame;  % - startFrames;
-% sub01.(trialName).step_TO_HS = step_fr_ft_XYZ;
 
 %% Track data of unspecified marker for trials
-tracker = 8;
-tracker = squeeze(data_mar_dim_frame(tracker, 1:3, :)); %(nanmean
+%need to create code that finds STRN and puts that value into tracker data
+%acquisition
+%strn is changing between the different trials
+%first attempt
+markerID = 'STRN';
+markerXYZ = squeeze(data_mar_dim_frame(~cellfun(@isempty, strfind(markerLabels,markerID)),1:3,:));
+bb = diff(markerXYZ(1,:));
+step_TO_HS = step_fr_ft_XYZ;
+
+% tracker = 7;
+% tracker = squeeze(data_mar_dim_frame(tracker, 1:3, :)); %(nanmeanfor ii = step_TO_HS(1,:)    
+% for step_TO_HS = step_fr_ft_XYZ
+%     %match step when the STRN marker starts to move 
+%     (find(diff(markerXYZ(1,:))<=1))
 
 end

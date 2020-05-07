@@ -1,7 +1,7 @@
 %ARSO_MotionCaptureMaster
 clc
-clear all
-close all
+% clear all
+% close all
 if ispc %JSM PC
     codepath = 'C:\Users\jonma\Dropbox\ResearchProjects\GithubDesktop_DontEdit\COMPhaseSpacePlanning';
     dataPath = 'C:\Users\jonma\Google Drive\MotionCaptureProjects\COMPhaseSpacePlanningData\Data\Sub01\Trials';
@@ -18,7 +18,7 @@ addpath(genpath(cd)) %%add the current folder & subfolders to the path (so Matla
 
 %% Trial calc for loop
 
-for trialNum = 1:192
+for trialNum = 16%:12
     % Identify location where files are stored
     cd('/Users/MT/Google Drive File Stream/My Drive/MotionCaptureProjects/COMPhaseSpacePlanningData/Data/Sub01/Trials');
     
@@ -41,10 +41,11 @@ for trialNum = 1:192
 %         = loadPhaseSpaceMoCapData(fid,condTitle);    
     [data_mar_dim_frame,markerLabels,numFrames,step_TO_HS,tracker,bb]...
         = loadPhaseSpaceMoCapData(fid);
-%     figure(trialNum)
-%     plot(tracker(1,:))
-    
-%    %% Plot MoCap data for trial from start to finish
+    figure(trialNum)
+    plot(tracker(1,:))
+    %% Plot MoCap data for trial from start to finish
+
+
 % for fr = 805:10:1117
 %     %Clear current frame
 %     clf
@@ -115,10 +116,8 @@ for trialNum = 1:192
     %% calcMar_Vel_Acc_Jerk function
     %function outputs vel,acc, and jerk values for LFoot and RFoot
     [LFoot,RFoot,totalCOM_calc,trial_start_end] = calcMar_Vel_Acc_Jerk(segCenter,totalCOMXYZ);
-    totalCOM_jerk_per_frame = totalCOM_calc.marJerk_abs./length(trial_start_end);
-    totalCOM_jerk_per_trial(trialNum) = sum(totalCOM_jerk_per_frame);
+    totalCOM_jerk_per_frame = totalCOM_calc.marJerk_abs./
     
-%     cond = totalCOM_jerk_per_trial
 %     figure(trialNum)
 %     plot(RFoot.marJerk_abs)
 %     hold on
@@ -138,10 +137,107 @@ for trialNum = 1:192
         
 end
 
-%% Find conditions of different trials
-    [condMatrix,configMatrix_mean] = findCond(totalCOM_jerk_per_trial);
-%take average across cond
-% errorbar
-% stdev
-% for matching conditions
+    %% COM plots
+%         % Plots for velocity, acceleration, and jerk
+%         figure(11)
+%         subplot(1,3,1)
+%         plot(FreeWalking.COMVel,'r-o','MarkerSize',2)
+%         hold on
+%         grid on
+%         title('COM Velocity')
+%         
+%         subplot(1,3,2)
+%         plot(FreeWalking.COMAcc,'b-o','MarkerSize',2)
+%         hold on
+%         title('COM Acceleration')
+%         
+%         subplot(1,3,3)
+%         plot(FreeWalking.COMJerk,'g-o','MarkerSize',2)
+%         hold on
+%         title('COM Jerk')         
 
+        %% RFoot calcs and plots        
+%         figure(43)
+%         subplot(2,3,1)
+%         plot(FullVision.RFootVel,'r-o','MarkerSize',2)
+%         hold on
+%         grid on
+%         title('RFoot Velocity')
+%         
+%         subplot(2,3,2)
+%         plot(FullVision.RFootAcc,'b-o','MarkerSize',2)
+%         hold on
+%         title('RFoot Acceleration')
+%         
+%         subplot(2,3,3)
+%         plot(FullVision.RFootJerk,'g-o','MarkerSize',2)
+%         hold on
+%         title('RFoot Jerk') 
+        
+        %% LFoot calcs and plots
+%         subplot(2,3,4)
+%         plot(FullVision.LFootVel,'r-o','MarkerSize',2)
+%         hold on
+%         grid on
+%         title('LFoot Velocity')
+%         
+%         subplot(2,3,5)
+%         plot(FullVision.LFootAcc,'b-o','MarkerSize',2)
+%         hold on
+%         title('LFoot Acceleration')
+%         
+%         subplot(2,3,6)
+%         plot(FullVision.LFootJerk,'g-o','MarkerSize',2)
+%         hold on
+%         title('LFoot Jerk')
+
+% %% Plot MoCap data for trial from start to finish
+% figure(trialNum)
+% 
+% for fr = 1:10:numFrames
+%     %Clear current frame
+%     clf
+% 
+%     %Plot all markers in x,y, and z
+%     plot3(data_mar_dim_frame(:, 1, fr),...
+%         data_mar_dim_frame(:, 2, fr),...
+%         data_mar_dim_frame(:, 3, fr),'k.','MarkerFaceColor','k')
+%     
+%     hold on
+% %     
+% %     %% Uncover the unknown marker location
+% % %     plot3(unknownID(1,fr),...
+% % %         unknownID(2,fr),...
+% % %         unknownID(3,fr),'p','DisplayName','RWRB');
+% % 
+% % %     %% Seg Evals in 3D
+% % %     %plot of total anatomical COM
+% % %     plot3(segCenter.RHandCenter_mar_dim_frame(1,fr),...
+% % %         segCenter.RHandCenter_mar_dim_frame(2,fr),...
+% % %         segCenter.RHandCenter_mar_dim_frame(3,fr),'p','DisplayName','Next');
+% %     
+% %     %% Total Body COM in 3D
+% %     %plot of total anatomical COM
+% %     plot3(totalCOMXYZ(1,fr),...
+% %         totalCOMXYZ(2,fr),...
+% %         totalCOMXYZ(3,fr),'p','DisplayName','TotalCOMXYZ');
+% %     
+%     %% Plotting parameters
+%     axis equal
+%     grid on
+%     legend
+%     
+%     %optimal x y z graph limits 
+%     xlim([-1e3 5e3])
+%     ylim([-1e3 1e3]) %full lab
+% %    ylim([1e3 3e3]) %smaller space
+%     zlim([0 3e3])
+%     
+%     %unsure of what this section XYZs
+%     az = -84.362;
+%     el =  20.417;
+%     view(az,el)
+%     
+%     
+%    drawnow
+% end
