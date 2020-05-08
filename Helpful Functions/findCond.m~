@@ -1,14 +1,26 @@
-function [condMatrix,configMatrix_mean,configMatrix_std] = findCond(totalCOM_jerk_per_trial)
+function [condMatrix,condMatrix_new,configMatrix_mean,configMatrix_std] = findCond(totalCOM_jerk_per_trial)
 %Find and organize conditions into matrix
 
+%Condition structure for sub01
+condNum = [0 4 7 2 1 5 6 3 0 3 6 5 1 2 7 4];
 condNum_p1 = [0 4 7 2 1 5 6 3];
+sort_condNum_p1 = sort(condNum_p1);
 condNum_p2 = [0 3 6 5 1 2 7 4];
+sort_condNum_p2 = sort(condNum_p1);
 
 % condNum = [0 4 7 2 1 5 6 3 0 3 6 5 1 2 7 4];
 % condMatrix = ones(12,16);
 condMatrix = reshape(totalCOM_jerk_per_trial,[12,16]);
 % condTitle = string(condNum);
 % T = table(condMatrix,'RowNames',condTitle);
+
+for ii = condNum
+    if find(ii == 0)
+        respective_col
+        condMatrix_new(:,1) = condMatrix(find(ii == 0));
+    
+
+
 
 for ii = condNum
 %     if ii(find(ii == 0))
