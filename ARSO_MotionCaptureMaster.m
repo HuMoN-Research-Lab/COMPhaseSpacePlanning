@@ -139,7 +139,7 @@ for trialNum = 1:192
 end
 
 %% Find conditions of different trials
-    [condMatrix,configMatrix_mean] = findCond(totalCOM_jerk_per_trial);
+    [condMatrix_new] = findCond(totalCOM_jerk_per_trial);
 %take average across cond
 % errorbar
 % stdev
