@@ -37,21 +37,41 @@ x_diff =        diff(markerXYZ(1,:));
 step_TO_HS =    step_fr_ft_XYZ;
 
 %% Filter for the start of the trial
-for ii = x_diff
-    if ii >= 1.0
-        startTrial = find(ii >= 1.0,1);
-        startStep = find(step_TO_HS >= startTrial,1); %references 2nd row
-        revised_step_TO_HS = step_TO_HS(startStep:end,:);
-    end
+
+if ii >= 1.0
+    startTrial = find(jj >= 1.0,1);
+    startStep = find(step_TO_HS >= startTrial,1); %references 2nd row
+    revised_step_TO_HS = step_TO_HS(startStep:end,:);
 end
+
 
 %First step filter
 step_TO_HS = revised_step_TO_HS;
+leftStep = find(step_TO_HS(:,3) == 1);
+rightStep = find(step_TO_HS(:,3) == 2);
+rightStep_filter = diff(rightStep);
 
-for ii = step_TO_HS
-    stepCount = ii(:,3);
-    left_Step = find(stepCount == 1);
-    right_Step = find(stepCount == 2);
+rightStep = rightStep(1):rightStep(filter+1);
+
+for jj = rightStep_filter
+    filter = find(jj == 1);
+    rightStep = rightStep(1:filter);
+end
+    
+%     if jj == rightStep+1
+        
+        act_rightStep = mod(rightStep,2) == 1 %mod step doesnt work, needs to be iter
+
+        
+
+    
+    % detect which step is incorrect and revise it accordingly
+    revStep = mod(leftStep,2);
+    leftStep = leftStep(revStep);
+    
+    revStep = ~mod(rightStep,2);
+    rightStep = rightStep(revStep);
+
 
     
 
