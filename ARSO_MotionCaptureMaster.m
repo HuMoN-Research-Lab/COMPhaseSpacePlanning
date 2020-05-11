@@ -17,8 +17,11 @@ cd(codePath)
 addpath(genpath(cd)) %%add the current folder & subfolders to the path (so Matlab can see the BTK methods)
 
 %% Trial calc for loop
+totalTrials =   192;
+totalCond =     8;
+totalExp =      12;
 
-for trialNum = 1:192
+for trialNum = 1:totalTrials
     % Identify location where files are stored
     cd('/Users/MT/Google Drive File Stream/My Drive/MotionCaptureProjects/COMPhaseSpacePlanningData/Data/Sub01/Trials');
     
@@ -139,7 +142,8 @@ for trialNum = 1:192
 end
 
 %% Find conditions of different trials
-    [condMatrix_new] = findCond(totalCOM_jerk_per_trial);
+    [condMatrix] = formatCond(totalCOM_jerk_per_trial,totalCond,totalExp);
+    
 %take average across cond
 % errorbar
 % stdev
