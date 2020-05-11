@@ -142,7 +142,7 @@ for trialNum = 1:totalTrials
 end
 
 %% Find conditions of different trials
-    [condMatrix] = formatCond(totalCOM_jerk_per_trial,totalCond,totalExp);
+[condMatrix] = formatCond(totalCOM_jerk_per_trial,totalCond,totalExp);
     
 %take average across cond
 % errorbar
