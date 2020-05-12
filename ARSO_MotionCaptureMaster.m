@@ -4,7 +4,7 @@ clear all
 close all
 if ispc %JSM PC
     codepath = 'C:\Users\jonma\Dropbox\ResearchProjects\GithubDesktop_DontEdit\COMPhaseSpacePlanning';
-    dataPath = 'C:\Users\jonma\Google Drive\MotionCaptureProjects\COMPhaseSpacePlanningData\Data\Sub01\Trials';
+    dataPath = 'C:\Users\jonma\Google Drive\MotionCaptureProjects\COMPhaseSpacePlanningData\Data\Sub01\mat';
 elseif ismac %MT Mac
     codePath = '/Users/MT/Documents/GitHub/COMPhaseSpacePlanning';
     dataPath = '/Users/MT/Google Drive File Stream/My Drive/MotionCaptureProjects/COMPhaseSpacePlanningData/Data/Sub01/mat';
@@ -22,8 +22,6 @@ totalCond =     8;      %req for formatting trial results
 totalExp =      12;     %req for formatting trial results
 
 for trialNum = 1:totalTrials
-    % Identify location where files are stored
-    cd('/Users/MT/Google Drive File Stream/My Drive/MotionCaptureProjects/COMPhaseSpacePlanningData/Data/Sub01/Trials');
     
     fid = [dataPath filesep sprintf('trial%03d',trialNum) '.mat'];
     
@@ -42,11 +40,9 @@ for trialNum = 1:totalTrials
     %% Load data from specific fid
     % Function loads req outputs from .mat files
     [data_mar_dim_frame,markerLabels,numFrames,step_TO_HS,tracker,bb]...
-        = loadPhaseSpaceMoCapData(fid);
+        = loadData(fid);
     
-    %% Plot full body MoCap for trial from start to finish
-    figure(trialNum)
-    
+    %% Plot full body MoCap for trial from start to finish    
     % for fr = 805:10:1117
     %     %Clear current frame
     %     clf

@@ -2,6 +2,11 @@ function [LFoot,RFoot,totalCOM_calc,trial_start_end] = calcMar_Vel_Acc_Jerk(segC
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Function calculates vel,acc,and jerk using segCenter of respective foot
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%x+y+z jerk, average jerk in x y and z what are the differences?
+%differences might be magnified in diff dimensions
+%free walking people walk faster
+%limited walking people walk slower but evaluate diff dimension 
+
 %% Define initial conditions
 LFoot =   [];
 RFoot =   [];
@@ -9,6 +14,7 @@ totalCOM_calc = [];
 
 %% COM vel, acc, and jerk calculations
 marVelx =                           diff(totalCOMXYZ(1,:));
+marVely =                           diff(totalCOMXYZ(2,:));
 marVelz =                           diff(totalCOMXYZ(3,:));
 calc_marVel =                       plus(marVelx,marVelz);
 
