@@ -3,7 +3,6 @@ function [data_mar_dim_frame,markerLabels,numFrames,step_TO_HS,markerXYZ,x_diff]
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %loadPhaseSpaceMoCapData outputs various variables from the file name 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 %% Load file based on fileName
 % sub01 = [];
 load(fid);
@@ -23,7 +22,6 @@ numFrames = endFrame;  % - startFrames;
 %% Step acquisition
 %perform filter for zenistep finder
 %acquire steps when trial started depending on the STRM movement
-%use those frames to perform first filter to step_TO_HS
 %next filter out all duplicates
 
 %% Track data of unspecified marker for trials
@@ -57,20 +55,16 @@ for jj = rightStep_filter
     filter = find(jj == 1);
     rightStep = rightStep(1:filter);
 end
-    
-%     if jj == rightStep+1
-        
-        act_rightStep = mod(rightStep,2) == 1 %mod step doesnt work, needs to be iter
-
+      
         
 
     
-    % detect which step is incorrect and revise it accordingly
-    revStep = mod(leftStep,2);
-    leftStep = leftStep(revStep);
-    
-    revStep = ~mod(rightStep,2);
-    rightStep = rightStep(revStep);
+%detect which step is incorrect and revise it accordingly
+revStep = mod(leftStep,2);
+leftStep = leftStep(revStep);
+
+revStep = ~mod(rightStep,2);
+rightStep = rightStep(revStep);
 
 
     
