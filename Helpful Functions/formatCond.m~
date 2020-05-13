@@ -56,36 +56,30 @@ end
 
 %% Analyze trials 0, 4, and 2
 %FreeWalking trials, Cond: 0
-freeWalking_mean =     mean(freeWalking_matrix);  
-freeWalking_stdev =    std(freeWalking_matrix);
+freeWalking_mean =      mean(freeWalking_matrix);  
+freeWalking_stdev =     std(freeWalking_matrix);
 
 %FullVision trials, Cond: 4
 fullVision_mean =      mean(fullVision_matrix);  
 fullVision_stdev =     std(fullVision_matrix);
 
 %LimitedVision trials, Cond: 2
-limitedVision_mean =   mean(limitedVision_matrix);  
-limitedVision_stdev =  std(limitedVision_matrix);
-
-trials_mean =   [freeWalking_mean fullVision_mean limitedVision_mean];
-trials_stdev =  [freeWalking_stdev fullVision_stdev limitedVision_stdev];
+limitedVision_mean =      mean(limitedVision_matrix);  
+limitedVision_stdev =     std(limitedVision_matrix);
 
 figure(8135);
-trialNames = {'Free Walking';'Full Vision';'Limited Vision'};
-bar(trials_mean)
-set(gca,'xticklabel',trialNames)
+bar(configMatrix_mean)
 hold on
-errorbar(trials_mean,trials_stdev);
-title('Total X-Z Jerk per Trial')
+errorbar(configMatrix_mean,configMatrix_std);
 
-% %% Mean and stdev calcs for formatted matrix
-% configMatrix_mean = mean(condMatrix);
-% configMatrix_std =  std(condMatrix,0,1);
-% 
-% %Visual representation of conditions results
-% figure(length(condNum))
-% bar(configMatrix_mean)
-% hold on
-% errorbar(configMatrix_mean,configMatrix_std);
+%% Mean and stdev calcs for formatted matrix
+configMatrix_mean = mean(condMatrix);
+configMatrix_std =  std(condMatrix,0,1);
+
+%Visual representation of conditions results
+figure(length(condNum))
+bar(configMatrix_mean)
+hold on
+errorbar(configMatrix_mean,configMatrix_std);
 
 end

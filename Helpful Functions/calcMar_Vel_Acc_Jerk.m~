@@ -13,13 +13,13 @@ RFoot =   [];
 totalCOM_calc = [];
 
 %% COM vel, acc, and jerk calculations
-marVelx =                    diff(totalCOMXYZ(1,:));
-marVely =                    diff(totalCOMXYZ(2,:));
-marVelz =                    diff(totalCOMXYZ(3,:));
-calc_totalmarVel =           plus(marVelx,marVely);
+marVelx =                           diff(totalCOMXYZ(1,:));
+marVely =                           diff(totalCOMXYZ(2,:));
+marVelz =                           diff(totalCOMXYZ(3,:));
+calc_totalmarVel =                  plus(marVelx,marVely);
 
 %id start and end point of trial
-trial_start_end =           find(calc_totalmarVel > 2);
+trial_start_end =                   find(calc_totalmarVel > 2);
 
 %velx, accx, and jerkx
 totalCOM_calc.marVelx =     marVelx(trial_start_end);
