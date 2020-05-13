@@ -111,6 +111,16 @@ for trialNum = 1:totalTrials
     %% calcMar_Vel_Acc_Jerk function
     %function outputs vel,acc, and jerk values for LFoot and RFoot
     [LFoot,RFoot,totalCOM_calc,trial_start_end] = calcMar_Vel_Acc_Jerk(segCenter,totalCOMXYZ);
+    
+    %Individual total jerk per x y z position
+    COMx_totalJerk_per_frame = totalCOM_calc.absMarJerkx./length(trial_start_end);
+    COMx_totalJerk_per_trial(trialNum) = sum(COMx_totalJerk_per_frame);
+    COMy_totalJerk_per_frame = totalCOM_calc.absMarJerky./length(trial_start_end);
+    COMy_totalJerk_per_trial(trialNum) = sum(COMy_totalJerk_per_frame);
+    COMz_totalJerk_per_frame = totalCOM_calc.absMarJerkz./length(trial_start_end);
+    COMz_totalJerk_per_trial(trialNum) = sum(COMz_totalJerk_per_frame);
+    
+    %Total jerk per x-y position
     totalCOM_jerk_per_frame = totalCOM_calc.totalmarJerk_abs./length(trial_start_end);
     totalCOM_jerk_per_trial(trialNum) = sum(totalCOM_jerk_per_frame);
     
@@ -135,4 +145,5 @@ for trialNum = 1:totalTrials
 end
 
 %% Find conditions of different trials
-[condMatrix] = formatCond(totalCOM_jerk_per_trial,totalCond,totalExp);
+[condMatrix] = formatCond(totalCOM_jerk_per_trial,COMx_totalJerk_per_trial,...
+    COMy_totalJerk_per_trial,COMz_totalJerk_per_trial,totalCond,totalExp);
