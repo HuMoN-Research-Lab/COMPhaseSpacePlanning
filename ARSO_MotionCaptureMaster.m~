@@ -20,7 +20,7 @@ totalTrials =   1;
 totalCond =     8;      %req for formatting trial results
 totalExp =      12;     %req for formatting trial results
 
-for trialNum = 2    %1:totalTrials
+for trialNum = 1:totalTrials
     %% fid formatting
     fid = [dataPath filesep sprintf('trial%03d',trialNum) '.mat'];
     
@@ -107,7 +107,7 @@ for trialNum = 2    %1:totalTrials
     
     %% calcMar_Vel_Acc_Jerk function
     %function outputs vel,acc, and jerk values for LFoot and RFoot
-    [totalCOM_calc,trial_start_end] = calcCOMXYZ_Vel_Acc_Jerk(markerXYZ,totalCOMXYZ);
+    [LFoot,RFoot,totalCOM_calc,trial_start_end] = calcCOMXYZ_Vel_Acc_Jerk(markerXYZ,totalCOMXYZ);
     
     %Individual total jerk per x y z position
     COMx_totalJerk_per_frame = totalCOM_calc.absMarJerkx./length(trial_start_end);
@@ -122,7 +122,7 @@ for trialNum = 2    %1:totalTrials
     totalCOM_jerk_per_trial(trialNum) = sum(totalCOM_jerk_per_frame);
     
     %%
-    [head,chest,hip,LFoot,RFoot] = calcMar_Vel_Acc_Jerk(segCenter,trial_start_end);
+    [foot,hips,chest,head] = calcMar_Vel_Acc_Jerk(segCenter);
     %     cond = totalCOM_jerk_per_trial
     %     figure(trialNum)
     %     plot(RFoot.marJerk_abs)

@@ -16,6 +16,10 @@ if ii >= 1.0
     revised_step_TO_HS = step_TO_HS(startStep:end,:);
 end
 
+%Sanity check
+figure(1)
+plot(markerXYZ(1,:))    %identifies the start of the trial
+
 %% 2nd filter of unwanted steps 
 for stepNum = 2:length(step_TO_HS)
     stepNum %print out the steps that the loop is on

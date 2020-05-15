@@ -1,4 +1,4 @@
-function[head,chest,hip,LFoot,RFoot] = calcMar_Vel_Acc_Jerk(segCenter,trial_start_end)
+function[foot,hips,chest,head] = calcMar_Vel_Acc_Jerk(segCenter,trial_start_end)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Calc vel, acc, jerk for specified segCenters
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -6,9 +6,8 @@ function[head,chest,hip,LFoot,RFoot] = calcMar_Vel_Acc_Jerk(segCenter,trial_star
 %Initial structuring of markers of interest
 head =  [];
 chest = [];
-hip =  [];
-LFoot =  [];
-RFoot =  [];
+hips =  [];
+Rfoot =  [];
 
 %% Head vel, acc, and jerk calculations
 %head individual (x y z) position
