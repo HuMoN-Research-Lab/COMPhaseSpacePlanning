@@ -18,110 +18,137 @@ for ii = condNum
         condMatrix_new(:,y) =  condMatrix_unformatted(:,y);
         condMatrix(:,1) = vertcat(condMatrix_new(:,y(1)),condMatrix_new(:,y(2)));
         freeWalking_matrix = condMatrix(:,1);
-        
-        COMx_data(:,y) =        COMx(:,y);
-        condMatrix_COMx(:,1) =  vertcat(COMx_data(:,y(1)),COMx_data(:,y(2)));
-        COMy_data(:,y) =        COMy(:,y);
-        condMatrix_COMy(:,1) =  vertcat(COMy_data(:,y(1)),COMy_data(:,y(2)));
-        COMz_data(:,y) =        COMz(:,y);
-        condMatrix_COMz(:,1) =  vertcat(COMz_data(:,y(1)),COMz_data(:,y(2)));
+        if freeWalking_matrix == condMatrix(:,1)
+            COMx_data(:,y) =        COMx(:,y);
+            condMatrix_COMx(:,1) =  vertcat(COMx_data(:,y(1)),COMx_data(:,y(2)));
+            COMy_data(:,y) =        COMy(:,y);
+            condMatrix_COMy(:,1) =  vertcat(COMy_data(:,y(1)),COMy_data(:,y(2)));
+            COMz_data(:,y) =        COMz(:,y);
+            condMatrix_COMz(:,1) =  vertcat(COMz_data(:,y(1)),COMz_data(:,y(2)));
+        end
     end
     if ii == 1
         y = find(condNum == 1,2);
         condMatrix_new(:,y) =  condMatrix_unformatted(:,y);
         condMatrix(:,2) = vertcat(condMatrix_new(:,y(1)),condMatrix_new(:,y(2)));
-        
-        COMx_data(:,y) =        COMx(:,y);
-        condMatrix_COMx(:,2) =  vertcat(COMx_data(:,y(1)),COMx_data(:,y(2)));
-        COMy_data(:,y) =        COMy(:,y);
-        condMatrix_COMy(:,2) =  vertcat(COMy_data(:,y(1)),COMy_data(:,y(2)));
-        COMz_data(:,y) =        COMz(:,y);
-        condMatrix_COMz(:,2) =  vertcat(COMz_data(:,y(1)),COMz_data(:,y(2)));        
+
+%         COMx_data(:,y) =        COMx(:,y);
+%         condMatrix_COMx(:,2) =  vertcat(COMx_data(:,y(1)),COMx_data(:,y(2)));
+%         COMy_data(:,y) =        COMy(:,y);
+%         condMatrix_COMy(:,2) =  vertcat(COMy_data(:,y(1)),COMy_data(:,y(2)));
+%         COMz_data(:,y) =        COMz(:,y);
+%         condMatrix_COMz(:,2) =  vertcat(COMz_data(:,y(1)),COMz_data(:,y(2))); 
+
     end
     if ii == 2
         y = find(condNum == 2,2);
         condMatrix_new(:,y) =  condMatrix_unformatted(:,y);
         condMatrix(:,3) = vertcat(condMatrix_new(:,y(1)),condMatrix_new(:,y(2)));
         limitedVision_matrix = condMatrix(:,3);
-        
-        COMx_data(:,y) =        COMx(:,y);
-        condMatrix_COMx(:,3) =  vertcat(COMx_data(:,y(1)),COMx_data(:,y(2)));
-        COMy_data(:,y) =        COMy(:,y);
-        condMatrix_COMy(:,3) =  vertcat(COMy_data(:,y(1)),COMy_data(:,y(2)));
-        COMz_data(:,y) =        COMz(:,y);
-        condMatrix_COMz(:,3) =  vertcat(COMz_data(:,y(1)),COMz_data(:,y(2))); 
-        
+        if limitedVision_matrix == condMatrix(:,3)
+            COMx_data(:,y) =        COMx(:,y);
+            condMatrix_COMx(:,3) =  vertcat(COMx_data(:,y(1)),COMx_data(:,y(2)));
+            COMy_data(:,y) =        COMy(:,y);
+            condMatrix_COMy(:,3) =  vertcat(COMy_data(:,y(1)),COMy_data(:,y(2)));
+            COMz_data(:,y) =        COMz(:,y);
+            condMatrix_COMz(:,3) =  vertcat(COMz_data(:,y(1)),COMz_data(:,y(2))); 
+        end 
     end
     if ii == 3
         y = find(condNum == 3,2);
         condMatrix_new(:,y) =  condMatrix_unformatted(:,y);
         condMatrix(:,4) = vertcat(condMatrix_new(:,y(1)),condMatrix_new(:,y(2)));
-        
-        COMx_data(:,y) =        COMx(:,y);
-        condMatrix_COMx(:,4) =  vertcat(COMx_data(:,y(1)),COMx_data(:,y(2)));
-        COMy_data(:,y) =        COMy(:,y);
-        condMatrix_COMy(:,4) =  vertcat(COMy_data(:,y(1)),COMy_data(:,y(2)));
-        COMz_data(:,y) =        COMz(:,y);
-        condMatrix_COMz(:,4) =  vertcat(COMz_data(:,y(1)),COMz_data(:,y(2))); 
+
+%         COMx_data(:,y) =        COMx(:,y);
+%         condMatrix_COMx(:,4) =  vertcat(COMx_data(:,y(1)),COMx_data(:,y(2)));
+%         COMy_data(:,y) =        COMy(:,y);
+%         condMatrix_COMy(:,4) =  vertcat(COMy_data(:,y(1)),COMy_data(:,y(2)));
+%         COMz_data(:,y) =        COMz(:,y);
+%         condMatrix_COMz(:,4) =  vertcat(COMz_data(:,y(1)),COMz_data(:,y(2))); 
+
     end
     if ii == 4
         y = find(condNum == 4,2);
         condMatrix_new(:,y) =  condMatrix_unformatted(:,y);
         condMatrix(:,5) = vertcat(condMatrix_new(:,y(1)),condMatrix_new(:,y(2)));
         fullVision_matrix = condMatrix(:,5);
-        
-        COMx_data(:,y) =        COMx(:,y);
-        condMatrix_COMx(:,5) =  vertcat(COMx_data(:,y(1)),COMx_data(:,y(2)));
-        COMy_data(:,y) =        COMy(:,y);
-        condMatrix_COMy(:,5) =  vertcat(COMy_data(:,y(1)),COMy_data(:,y(2)));
-        COMz_data(:,y) =        COMz(:,y);
-        condMatrix_COMz(:,5) =  vertcat(COMz_data(:,y(1)),COMz_data(:,y(2))); 
+        if fullVision_matrix == condMatrix(:,5)
+            COMx_data(:,y) =        COMx(:,y);
+            condMatrix_COMx(:,5) =  vertcat(COMx_data(:,y(1)),COMx_data(:,y(2)));
+            COMy_data(:,y) =        COMy(:,y);
+            condMatrix_COMy(:,5) =  vertcat(COMy_data(:,y(1)),COMy_data(:,y(2)));
+            COMz_data(:,y) =        COMz(:,y);
+            condMatrix_COMz(:,5) =  vertcat(COMz_data(:,y(1)),COMz_data(:,y(2)));
+        end
     end
     if ii == 5
         y = find(condNum == 5,2);
         condMatrix_new(:,y) =  condMatrix_unformatted(:,y);
         condMatrix(:,6) = vertcat(condMatrix_new(:,y(1)),condMatrix_new(:,y(2)));
         
-        COMx_data(:,y) =        COMx(:,y);
-        condMatrix_COMx(:,6) =  vertcat(COMx_data(:,y(1)),COMx_data(:,y(2)));
-        COMy_data(:,y) =        COMy(:,y);
-        condMatrix_COMy(:,6) =  vertcat(COMy_data(:,y(1)),COMy_data(:,y(2)));
-        COMz_data(:,y) =        COMz(:,y);
-        condMatrix_COMz(:,6) =  vertcat(COMz_data(:,y(1)),COMz_data(:,y(2))); 
+%         COMx_data(:,y) =        COMx(:,y);
+%         condMatrix_COMx(:,6) =  vertcat(COMx_data(:,y(1)),COMx_data(:,y(2)));
+%         COMy_data(:,y) =        COMy(:,y);
+%         condMatrix_COMy(:,6) =  vertcat(COMy_data(:,y(1)),COMy_data(:,y(2)));
+%         COMz_data(:,y) =        COMz(:,y);
+%         condMatrix_COMz(:,6) =  vertcat(COMz_data(:,y(1)),COMz_data(:,y(2))); 
+
     end
     if ii == 6
         y = find(condNum == 6,2);
         condMatrix_new(:,y) =  condMatrix_unformatted(:,y);
         condMatrix(:,7) = vertcat(condMatrix_new(:,y(1)),condMatrix_new(:,y(2)));
         
-        COMx_data(:,y) =        COMx(:,y);
-        condMatrix_COMx(:,7) =  vertcat(COMx_data(:,y(1)),COMx_data(:,y(2)));
-        COMy_data(:,y) =        COMy(:,y);
-        condMatrix_COMy(:,7) =  vertcat(COMy_data(:,y(1)),COMy_data(:,y(2)));
-        COMz_data(:,y) =        COMz(:,y);
-        condMatrix_COMz(:,7) =  vertcat(COMz_data(:,y(1)),COMz_data(:,y(2))); 
+%         COMx_data(:,y) =        COMx(:,y);
+%         condMatrix_COMx(:,7) =  vertcat(COMx_data(:,y(1)),COMx_data(:,y(2)));
+%         COMy_data(:,y) =        COMy(:,y);
+%         condMatrix_COMy(:,7) =  vertcat(COMy_data(:,y(1)),COMy_data(:,y(2)));
+%         COMz_data(:,y) =        COMz(:,y);
+%         condMatrix_COMz(:,7) =  vertcat(COMz_data(:,y(1)),COMz_data(:,y(2)));
+
     end
     if ii == 7
         y = find(condNum == 7,2);
         condMatrix_new(:,y) =  condMatrix_unformatted(:,y);
         condMatrix(:,8) = vertcat(condMatrix_new(:,y(1)),condMatrix_new(:,y(2)));
         
-        COMx_data(:,y) =        COMx(:,y);
-        condMatrix_COMx(:,8) =  vertcat(COMx_data(:,y(1)),COMx_data(:,y(2)));
-        COMy_data(:,y) =        COMy(:,y);
-        condMatrix_COMy(:,8) =  vertcat(COMy_data(:,y(1)),COMy_data(:,y(2)));
-        COMz_data(:,y) =        COMz(:,y);
-        condMatrix_COMz(:,8) =  vertcat(COMz_data(:,y(1)),COMz_data(:,y(2))); 
+%         COMx_data(:,y) =        COMx(:,y);
+%         condMatrix_COMx(:,8) =  vertcat(COMx_data(:,y(1)),COMx_data(:,y(2)));
+%         COMy_data(:,y) =        COMy(:,y);
+%         condMatrix_COMy(:,8) =  vertcat(COMy_data(:,y(1)),COMy_data(:,y(2)));
+%         COMz_data(:,y) =        COMz(:,y);
+%         condMatrix_COMz(:,8) =  vertcat(COMz_data(:,y(1)),COMz_data(:,y(2))); 
+
     end
 end
 
 %% Analyze COMx,COMy, and COMz
+% for COMx = 2:length(condMatrix_COMx)
+%     currCol = condMatrix_COMx(COMx);
+%     prevCol = condMatrix_COMx(COMx-1);
+%     
+% %     if prevCol ~= 0
+% %         continue
+%     if currCol == 0
+%         condMatrix_COMx(COMx,:) = [];
+%     end
+% end
+
+%Remove unwanted columns in COMx
+condMatrix_COMx(:,4) = [];
+condMatrix_COMx(:,2) = [];
 condMatrix_COMx_mean =  mean(condMatrix_COMx);
 condMatrix_COMx_stdev = std(condMatrix_COMx);
 
+%Remove unwanted columns in COMy
+condMatrix_COMy(:,4) = [];
+condMatrix_COMy(:,2) = [];
 condMatrix_COMy_mean =  mean(condMatrix_COMy);
 condMatrix_COMy_stdev = std(condMatrix_COMy);
 
+%Remove unwanted columns in COMz
+condMatrix_COMz(:,4) = [];
+condMatrix_COMz(:,2) = [];
 condMatrix_COMz_mean =  mean(condMatrix_COMz);
 condMatrix_COMz_stdev = std(condMatrix_COMz);
 

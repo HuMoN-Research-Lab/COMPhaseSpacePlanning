@@ -16,7 +16,7 @@ cd(codePath)
 addpath(genpath(cd)) %%add the current folder & subfolders to the path (so Matlab can see the BTK methods)
 
 %% Experiment Info 
-totalTrials =   192;
+totalTrials =   1;
 totalCond =     8;      %req for formatting trial results
 totalExp =      12;     %req for formatting trial results
 
@@ -39,9 +39,6 @@ for trialNum = 1:totalTrials
     %% Load data from specific fid
     % Function loads req outputs from .mat files
     [data_mar_dim_frame,markerLabels,numFrames,step_TO_HS,markerXYZ] = loadData(fid);
-    
-%     %% Filter step finder
-%     [step_TO_HS] = stepFilter(step_TO_HS,markerXYS);
     
     %% Plot full body MoCap for trial from start to finish    
     % for fr = 805:10:1117
@@ -112,6 +109,7 @@ for trialNum = 1:totalTrials
     %function outputs vel,acc, and jerk values for LFoot and RFoot
     [LFoot,RFoot,totalCOM_calc,trial_start_end] = calcMar_Vel_Acc_Jerk(segCenter,totalCOMXYZ);
     
+    
     %Individual total jerk per x y z position
     COMx_totalJerk_per_frame = totalCOM_calc.absMarJerkx./length(trial_start_end);
     COMx_totalJerk_per_trial(trialNum) = sum(COMx_totalJerk_per_frame);
@@ -144,6 +142,15 @@ for trialNum = 1:totalTrials
     
 end
 
+%% Filter step finder
+[rev_step_TO_HS] = stepFilter(step_TO_HS,markerXYZ);
+
 %% Find conditions of different trials
-[condMatrix] = formatCond(totalCOM_jerk_per_trial,COMx_totalJerk_per_trial,...
-    COMy_totalJerk_per_trial,COMz_totalJerk_per_trial,totalCond,totalExp);
+% [condMatrix] = formatCond(totalCOM_jerk_per_trial,COMx_totalJerk_per_trial,...
+%     COMy_totalJerk_per_trial,COMz_totalJerk_per_trial,totalCond,totalExp);
+
+subplot(2,1,1);
+xline(rev_step_TO_HS(:,1))
+plot(RFoot.marVelx)
+subplot(2,1,2);
+plot(LFoot.marVelx)
