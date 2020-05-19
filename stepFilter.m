@@ -17,12 +17,12 @@ if ii >= 1.0
 end
 
 %Sanity check
-figure(1)
-plot(markerXYZ(1,:))    %identifies the start of the trial
+% figure(1)
+% plot(markerXYZ(1,:))    %identifies the start of the trial
 
 %% 2nd filter of unwanted steps 
 for stepNum = 2:length(step_TO_HS)
-    stepNum %print out the steps that the loop is on
+%     stepNum %print out the steps that the loop is on
     currStepLeg = step_TO_HS(stepNum,3);
     prevStepLeg = step_TO_HS(stepNum-1,3);
     

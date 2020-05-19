@@ -16,11 +16,11 @@ cd(codePath)
 addpath(genpath(cd)) %%add the current folder & subfolders to the path (so Matlab can see the BTK methods)
 
 %% Experiment Info 
-totalTrials =   1;
+totalTrials =   12;
 totalCond =     8;      %req for formatting trial results
 totalExp =      12;     %req for formatting trial results
 
-for trialNum = 2    %1:totalTrials
+for trialNum = 1:totalTrials
     %% fid formatting
     fid = [dataPath filesep sprintf('trial%03d',trialNum) '.mat'];
     
@@ -41,51 +41,51 @@ for trialNum = 2    %1:totalTrials
     [data_mar_dim_frame,markerLabels,numFrames,step_TO_HS,markerXYZ] = loadData(fid);
     
     %% Plot full body MoCap for trial from start to finish    
-    % for fr = 805:10:1117
-    %     %Clear current frame
-    %     clf
-    %
-    %     %Plot all markers in x,y, and z
-    %     plot3(data_mar_dim_frame(:, 1, fr),...
-    %         data_mar_dim_frame(:, 2, fr),...
-    %         data_mar_dim_frame(:, 3, fr),'k.','MarkerFaceColor','k')
-    %
-    %     hold on
-    %
-    %     %% Uncover the unknown marker location
-    %     plot3(tracker(1,fr),...
-    %         tracker(2,fr),...
-    %         tracker(3,fr),'p','DisplayName','STRN');
-    %
-    %     %% Seg Evals in 3D
-    %     %plot of total anatomical COM
-    %     plot3(segCenter.RHandCenter_mar_dim_frame(1,fr),...
-    %         segCenter.RHandCenter_mar_dim_frame(2,fr),...
-    %         segCenter.RHandCenter_mar_dim_frame(3,fr),'p','DisplayName','Next');
-    %
-    %     %% Total Body COM in 3D
-    %     %plot of total anatomical COM
-    %     plot3(totalCOMXYZ(1,fr),...
-    %         totalCOMXYZ(2,fr),...
-    %         totalCOMXYZ(3,fr),'p','DisplayName','TotalCOMXYZ');
-    % %
-    %     %% Plotting parameters
-    %     axis equal
-    %     grid on
-    %     legend
-    %
-    %     %optimal x y z graph limits
-    %     xlim([-1e3 5e3])
-    %     ylim([-1e3 1e3]) %full lab
-    % %    ylim([1e3 3e3]) %smaller space
-    %     zlim([0 3e3])
-    %
-    %     %unsure of what this section XYZs
-    %     az = -84.362;
-    %     el =  20.417;
-    %     view(az,el)
-    %    drawnow
-    % end
+%     for fr = 1:10:numFrames
+%         %Clear current frame
+%         clf
+%     
+%         %Plot all markers in x,y, and z
+%         plot3(data_mar_dim_frame(:, 1, fr),...
+%             data_mar_dim_frame(:, 2, fr),...
+%             data_mar_dim_frame(:, 3, fr),'k.','MarkerFaceColor','k')
+%     
+%         hold on
+%     
+%         %% Uncover the unknown marker location
+%         plot3(markerXYZ(1,fr),...
+%             markerXYZ(2,fr),...
+%             markerXYZ(3,fr),'p','DisplayName','STRN');
+%     
+% %         %% Seg Evals in 3D
+% %         %plot of total anatomical COM
+% %         plot3(segCenter.RHandCenter_mar_dim_frame(1,fr),...
+% %             segCenter.RHandCenter_mar_dim_frame(2,fr),...
+% %             segCenter.RHandCenter_mar_dim_frame(3,fr),'p','DisplayName','Next');
+% %     
+% %         %% Total Body COM in 3D
+% %         %plot of total anatomical COM
+% %         plot3(totalCOMXYZ(1,fr),...
+% %             totalCOMXYZ(2,fr),...
+% %             totalCOMXYZ(3,fr),'p','DisplayName','TotalCOMXYZ');
+%     %
+%         %% Plotting parameters
+%         axis equal
+%         grid on
+%         legend
+%     
+%         %optimal x y z graph limits
+%         xlim([-1e3 5e3])
+%         ylim([-1e3 1e3]) %full lab
+%     %    ylim([1e3 3e3]) %smaller space
+%         zlim([0 3e3])
+%     
+%         %unsure of what this section XYZs
+%         az = -84.362;
+%         el =  20.417;
+%         view(az,el)
+%        drawnow
+%     end
     
     %     %% Butterworth filter
     %     order   = 4;
@@ -105,29 +105,101 @@ for trialNum = 2    %1:totalTrials
     % Function outputs marker frames evaluation
     [emptyFrames] = locEmptySegFrames(segCenter,totalCOMXYZ);
     
-    %% calcMar_Vel_Acc_Jerk function
-    %function outputs vel,acc, and jerk values for LFoot and RFoot
-    [totalCOM_calc,trial_start_end] = calcCOMXYZ_Vel_Acc_Jerk(markerXYZ,totalCOMXYZ);
+    %% calcCOMXYZ_Vel_Acc_Jerk function
+%     %function outputs vel,acc, and jerk values for totalCOM
+    [totalCOM_calc,trial_start_end] = calcCOMXYZ_Vel_Acc_Jerk(totalCOMXYZ);
+%     
+%     %Individual total jerk per x y z position
+%     COMx_totalJerk_per_frame = totalCOM_calc.absMarJerkx./length(trial_start_end);
+%     COMx_totalJerk_per_trial(trialNum) = sum(COMx_totalJerk_per_frame);
+%     COMy_totalJerk_per_frame = totalCOM_calc.absMarJerky./length(trial_start_end);
+%     COMy_totalJerk_per_trial(trialNum) = sum(COMy_totalJerk_per_frame);
+%     COMz_totalJerk_per_frame = totalCOM_calc.absMarJerkz./length(trial_start_end);
+%     COMz_totalJerk_per_trial(trialNum) = sum(COMz_totalJerk_per_frame);
+%     
+%     %Total jerk per x-y position
+%     totalCOM_jerk_per_frame = totalCOM_calc.totalmarJerk_abs./length(trial_start_end);
+%     totalCOM_jerk_per_trial(trialNum) = sum(totalCOM_jerk_per_frame);
     
-    %Individual total jerk per x y z position
-    COMx_totalJerk_per_frame = totalCOM_calc.absMarJerkx./length(trial_start_end);
-    COMx_totalJerk_per_trial(trialNum) = sum(COMx_totalJerk_per_frame);
-    COMy_totalJerk_per_frame = totalCOM_calc.absMarJerky./length(trial_start_end);
-    COMy_totalJerk_per_trial(trialNum) = sum(COMy_totalJerk_per_frame);
-    COMz_totalJerk_per_frame = totalCOM_calc.absMarJerkz./length(trial_start_end);
-    COMz_totalJerk_per_trial(trialNum) = sum(COMz_totalJerk_per_frame);
-    
-    %Total jerk per x-y position
-    totalCOM_jerk_per_frame = totalCOM_calc.totalmarJerk_abs./length(trial_start_end);
-    totalCOM_jerk_per_trial(trialNum) = sum(totalCOM_jerk_per_frame);
-    
-    %%
+    %% Calculates marker vel,acc,and jerk for trials
     [head,chest,hip,LFoot,RFoot] = calcMar_Vel_Acc_Jerk(segCenter,trial_start_end);
-    %     cond = totalCOM_jerk_per_trial
-    %     figure(trialNum)
-    %     plot(RFoot.marJerk_abs)
-    %     hold on
-    %     plot(LFoot.marJerk_abs)
+
+    %% Filter step finder
+    [rev_step_TO_HS] = stepFilter(step_TO_HS,markerXYZ);
+    
+    %% Plot head, chest, hip, and feet
+    %Create function that plots marker in x,y,z
+    figure(trialNum)
+    %Evaluate two coordinate frames
+    subplot(3,4,1)
+    plot(head.marVelx)
+    title('Head Velx')
+    subplot(3,4,3)
+    plot(head.marVely)
+    title('Head Vely')
+    subplot(3,4,5)
+    plot(chest.marVelx)
+    title('Chest Velx')
+    subplot(3,4,7)
+    plot(chest.marVely)
+    title('Chest Vely')
+    subplot(3,4,9)
+    plot(hip.marVelx)
+    title('Hip Velx')
+    subplot(3,4,11)
+    plot(hip.marVely)
+    title('Hip Vely')
+    subplot(3,4,2)
+    plot(RFoot.marVelx)
+    title('RFoot Velx')
+    subplot(3,4,4)
+    plot(RFoot.marVely)
+    title('RFoot Vely')
+    subplot(3,4,6)
+    plot(LFoot.marVelx)
+    title('LFoot Velx')
+    subplot(3,4,8)
+    plot(LFoot.marVely)
+    title('LFoot Vely')
+    subplot(3,4,10)
+    plot(RFoot.marVelx)
+    hold on
+    plot(LFoot.marVelx)
+    title('RFoot & LFoot Velx')
+    
+    subplot(3,4,12)
+    plot(RFoot.marVely)
+    hold on
+    plot(LFoot.marVely)
+    title('RFoot & LFoot Vely')
+    
+    
+%     %Evaluate just one coordinate frame    
+%     subplot(3,2,1)
+%     plot(head.marVelx)
+%     title('Head Velx')
+%     subplot(3,2,3)
+%     plot(chest.marVelx)
+%     title('Chest Velx')
+%     subplot(3,2,5)
+%     plot(hip.marVelx)
+%     title('Hip Velx')
+%     
+%     subplot(3,2,2)
+%     plot(RFoot.marVelx)
+%     title('RFoot Velx')
+%     subplot(3,2,4)
+%     plot(LFoot.marVelx)
+%     title('LFoot Velx')
+
+% %Refined analysis of different components
+%     subplot(3,1,1)
+%     plot(chest.marAccx)
+%     subplot(3,1,2)
+%     plot(chest.marAccy)
+%     subplot(3,1,3)
+%     plot(chest.marAccz)
+%     title('Chest Vel in X Y Z')
     
     %         %% ZeniStepFinder
     %         % Identify all heel-toe step locations
@@ -143,20 +215,12 @@ for trialNum = 2    %1:totalTrials
     
 end
 
-%% Filter step finder
-[rev_step_TO_HS] = stepFilter(step_TO_HS,markerXYZ);
-
 %% Find conditions of different trials
 % [condMatrix] = formatCond(totalCOM_jerk_per_trial,COMx_totalJerk_per_trial,...
 %     COMy_totalJerk_per_trial,COMz_totalJerk_per_trial,totalCond,totalExp);
 
-figure(trialNum)
-subplot(2,1,1);
-plot(RFoot.marVelx)
-subplot(2,1,2);
-plot(LFoot.marVelx)
-hold on
+%Attempt to create vertical lines on figures
 % y = max(RFoot.marVelx).*ones(size(step_TO_HS,1),1);
 % y = 0:max(RFoot.marVelx);%.*ones(size(step_TO_HS,1),1);
-y = 30;
-line(step_TO_HS(:,1),30,'Color','red','LineStyle','--')
+% y = 30;
+% line(step_TO_HS(:,1),30,'Color','red','LineStyle','--')
