@@ -3,7 +3,7 @@ clc
 clear all
 close all
 if ispc %JSM PC
-    codepath = 'C:\Users\jonma\Dropbox\ResearchProjects\GithubDesktop_DontEdit\COMPhaseSpacePlanning';
+    codePath = 'C:\Users\jonma\Dropbox\ResearchProjects\GithubDesktop_DontEdit\COMPhaseSpacePlanning';
     dataPath = 'C:\Users\jonma\Google Drive\MotionCaptureProjects\COMPhaseSpacePlanningData\Data\Sub01\mat';
 elseif ismac %MT Mac
     codePath = '/Users/MT/Documents/GitHub/COMPhaseSpacePlanning';
@@ -16,7 +16,7 @@ cd(codePath)
 addpath(genpath(cd)) %%add the current folder & subfolders to the path (so Matlab can see the BTK methods)
 
 %% Experiment Info 
-totalTrials =   12;
+totalTrials =   11;
 totalCond =     8;      %req for formatting trial results
 totalExp =      12;     %req for formatting trial results
 
@@ -122,84 +122,17 @@ for trialNum = 1:totalTrials
 %     totalCOM_jerk_per_trial(trialNum) = sum(totalCOM_jerk_per_frame);
     
     %% Calculates marker vel,acc,and jerk for trials
-    [head,chest,hip,LFoot,RFoot] = calcMar_Vel_Acc_Jerk(segCenter,trial_start_end);
+    [head,chest,hip,LThigh,RThigh,LLeg,RLeg,LFoot,RFoot] = calcMar_Vel_Acc_Jerk(segCenter,trial_start_end);
 
     %% Filter step finder
-    [rev_step_TO_HS] = stepFilter(step_TO_HS,markerXYZ);
+    [rev_step_TO_HS] = stepFilter(step_TO_HS,markerXYZ,trial_start_end);
+    %change start time depending on trial_start_end
     
     %% Plot head, chest, hip, and feet
     %Create function that plots marker in x,y,z
-    figure(trialNum)
-    %Evaluate two coordinate frames
-    subplot(3,4,1)
-    plot(head.marVelx)
-    title('Head Velx')
-    subplot(3,4,3)
-    plot(head.marVely)
-    title('Head Vely')
-    subplot(3,4,5)
-    plot(chest.marVelx)
-    title('Chest Velx')
-    subplot(3,4,7)
-    plot(chest.marVely)
-    title('Chest Vely')
-    subplot(3,4,9)
-    plot(hip.marVelx)
-    title('Hip Velx')
-    subplot(3,4,11)
-    plot(hip.marVely)
-    title('Hip Vely')
-    subplot(3,4,2)
-    plot(RFoot.marVelx)
-    title('RFoot Velx')
-    subplot(3,4,4)
-    plot(RFoot.marVely)
-    title('RFoot Vely')
-    subplot(3,4,6)
-    plot(LFoot.marVelx)
-    title('LFoot Velx')
-    subplot(3,4,8)
-    plot(LFoot.marVely)
-    title('LFoot Vely')
-    subplot(3,4,10)
-    plot(RFoot.marVelx)
-    hold on
-    plot(LFoot.marVelx)
-    title('RFoot & LFoot Velx')
-    
-    subplot(3,4,12)
-    plot(RFoot.marVely)
-    hold on
-    plot(LFoot.marVely)
-    title('RFoot & LFoot Vely')
-    
-    
-%     %Evaluate just one coordinate frame    
-%     subplot(3,2,1)
-%     plot(head.marVelx)
-%     title('Head Velx')
-%     subplot(3,2,3)
-%     plot(chest.marVelx)
-%     title('Chest Velx')
-%     subplot(3,2,5)
-%     plot(hip.marVelx)
-%     title('Hip Velx')
-%     
-%     subplot(3,2,2)
-%     plot(RFoot.marVelx)
-%     title('RFoot Velx')
-%     subplot(3,2,4)
-%     plot(LFoot.marVelx)
-%     title('LFoot Velx')
+    plotMar_vel_acc_jerk(head,chest,hip,LThigh,RThigh,LLeg,RLeg,LFoot,RFoot,trialNum,rev_step_TO_HS);
 
-% %Refined analysis of different components
-%     subplot(3,1,1)
-%     plot(chest.marAccx)
-%     subplot(3,1,2)
-%     plot(chest.marAccy)
-%     subplot(3,1,3)
-%     plot(chest.marAccz)
-%     title('Chest Vel in X Y Z')
+
     
     %         %% ZeniStepFinder
     %         % Identify all heel-toe step locations

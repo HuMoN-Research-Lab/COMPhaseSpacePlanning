@@ -1,4 +1,4 @@
-function [step_TO_HS] = stepFilter(step_TO_HS,markerXYZ)
+function [rev_step_TO_HS] = stepFilter(step_TO_HS,markerXYZ,trial_start_end)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Filter step_TO_HS from zeniStepFinder
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -9,16 +9,14 @@ function [step_TO_HS] = stepFilter(step_TO_HS,markerXYZ)
 
 
 %% Filter for the start of the trial
-ii = diff(markerXYZ(1,:));
-if ii >= 1.0
-    startTrial = find(ii >= 1.0,1);
-    startStep = find(step_TO_HS >= startTrial,1); %references 2nd row
-    revised_step_TO_HS = step_TO_HS(startStep:end,:);
+marker = diff(markerXYZ(1,:));
+for ii = 1:length(marker(1,:))
+    startTrial = find(marker(1,:) >= 1.0,1);
+    if startTrial >= 1.0
+        startStep = find(step_TO_HS >= startTrial,1); %references 2nd row
+        revised_step_TO_HS = (step_TO_HS(startStep:end,:));
+    end
 end
-
-%Sanity check
-% figure(1)
-% plot(markerXYZ(1,:))    %identifies the start of the trial
 
 %% 2nd filter of unwanted steps 
 for stepNum = 2:length(step_TO_HS)
@@ -35,4 +33,6 @@ for stepNum = 2:length(step_TO_HS)
 end %stepNum
 
 step_TO_HS(isnan(step_TO_HS(:,3)),:) = [];    %delete data in path that has nans
+rev_step_TO_HS = step_TO_HS(:,1:2) - trial_start_end(1);
 
+end

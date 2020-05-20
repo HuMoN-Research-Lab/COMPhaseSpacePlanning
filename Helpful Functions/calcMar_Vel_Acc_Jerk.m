@@ -1,4 +1,4 @@
-function[head,chest,hip,LFoot,RFoot] = calcMar_Vel_Acc_Jerk(segCenter,trial_start_end)
+function[head,chest,hip,LThigh,RThigh,LLeg,RLeg,LFoot,RFoot] = calcMar_Vel_Acc_Jerk(segCenter,trial_start_end)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Calc vel, acc, jerk for specified segCenters
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -8,6 +8,10 @@ function[head,chest,hip,LFoot,RFoot] = calcMar_Vel_Acc_Jerk(segCenter,trial_star
 head =      [];
 chest =     [];
 hip =       [];
+LThigh =    [];
+RThigh =    [];
+LLeg =      [];
+RLeg =      [];
 LFoot =     [];
 RFoot =     [];
 
@@ -38,49 +42,16 @@ head.totalmarAcc =         diff(head.totalmarVel);
 head.totalmarJerk =        diff(head.totalmarAcc);
 head.totalmarJerk_abs =    abs(head.totalmarJerk);
 
-% figure(10)
-% subplot(1,3,1)
-% plot(head.marVelx)
-% title('Head Velx')
-% subplot(1,3,2)
-% plot(head.marVely)
-% title('Head Vely')
-% subplot(1,3,3)
-% plot(head.marVelz)
-% title('Head Velz')
-% 
-% figure(11)
-% subplot(1,3,1)
-% plot(head.marAccx)
-% title('Head Accx')
-% subplot(1,3,2)
-% plot(head.marAccy)
-% title('Head Accy')
-% subplot(1,3,3)
-% plot(head.marAccz)
-% title('Head Accz')
-% 
-% figure(12)
-% subplot(1,3,1)
-% plot(head.totalmarJerk_abs)
-% title('Head Jerkx')
-% subplot(1,3,2)
-% plot(head.totalmarJerk_abs)
-% title('Head Jerky')
-% subplot(1,3,3)
-% plot(head.totalmarJerk_abs)
-% title('Head Jerkz')
-
 %% Chest vel, acc, and jerk calculations
 %chest individual (x y z) position
-chest_marPosx =             segCenter.chestCenter_mar_dim_frame(1,:);
-chest_marPosy =             segCenter.chestCenter_mar_dim_frame(2,:);
-chest_marPosz =             segCenter.chestCenter_mar_dim_frame(3,:);
+chest.marPosx =             segCenter.chestCenter_mar_dim_frame(1,:);
+chest.marPosy =             segCenter.chestCenter_mar_dim_frame(2,:);
+chest.marPosz =             segCenter.chestCenter_mar_dim_frame(3,:);
 
 %chest individual (x y z) velocity
-chest.marVelx =             diff(chest_marPosx(trial_start_end));
-chest.marVely =             diff(chest_marPosy(trial_start_end));
-chest.marVelz =             diff(chest_marPosz(trial_start_end));
+chest.marVelx =             diff(chest.marPosx(trial_start_end));
+chest.marVely =             diff(chest.marPosy(trial_start_end));
+chest.marVelz =             diff(chest.marPosz(trial_start_end));
 
 %chest individual (x y z) acceleration
 chest.marAccx =             diff(chest.marVelx);
@@ -97,50 +68,6 @@ chest.totalmarVel =         plus(chest.marVelx,chest.marVely);
 chest.totalmarAcc =         diff(chest.totalmarVel);
 chest.totalmarJerk =        diff(chest.totalmarAcc);
 chest.totalmarJerk_abs =    abs(chest.totalmarJerk);
-
-% figure(20)
-% subplot(1,3,1)
-% plot(chest.marVelx)
-% title('Chest Velx')
-% subplot(1,3,2)
-% plot(chest.marVely)
-% title('Chest Vely')
-% subplot(1,3,3)
-% plot(chest.marVelz)
-% title('Chest Velz')
-% 
-% figure(21)
-% subplot(1,3,1)
-% plot(chest.marAccx)
-% title('Chest Accx')
-% subplot(1,3,2)
-% plot(chest.marAccy)
-% title('Chest Accy')
-% subplot(1,3,3)
-% plot(chest.marAccz)
-% title('Chest Accz')
-% 
-% % figure(22)
-% % subplot(1,3,1)
-% % plot(chest.marJerkx)
-% % title('Chest Jerkx')
-% % subplot(1,3,2)
-% % plot(chest.marJerky)
-% % title('Chest Jerky')
-% % subplot(1,3,3)
-% % plot(chest.marJerkz)
-% % title('Chest Jerkz')
-% 
-% figure(25)
-% subplot(1,3,1)
-% plot(chest.totalmarVel)
-% title('Chest Total Vel')
-% subplot(1,3,2)
-% plot(chest.totalmarAcc)
-% title('Chest Total Acc')
-% subplot(1,3,3)
-% plot(chest.totalmarJerk_abs)
-% title('Chest Total Jerk')
 
 %% Hips vel, acc, and jerk calculations
 %hips individual (x y z) position
@@ -169,49 +96,111 @@ hip.totalmarAcc =         diff(hip.totalmarVel);
 hip.totalmarJerk =        diff(hip.totalmarAcc);
 hip.totalmarJerk_abs =    abs(hip.totalmarJerk);
 
-% figure(30)
-% subplot(1,3,1)
-% plot(hip.marVelx)
-% title('Hip Velx')
-% subplot(1,3,2)
-% plot(hip.marVely)
-% title('Hip Vely')
-% subplot(1,3,3)
-% plot(hip.marVelz)
-% title('Hip Velz')
-% 
-% figure(31)
-% subplot(1,3,1)
-% plot(hip.marAccx)
-% title('Hip Accx')
-% subplot(1,3,2)
-% plot(hip.marAccy)
-% title('Hip Accy')
-% subplot(1,3,3)
-% plot(hip.marAccz)
-% title('Hip Accz')
-% 
-% % figure(32)
-% % subplot(1,3,1)
-% % plot(hip.marJerkx)
-% % title('Hip Jerkx')
-% % subplot(1,3,2)
-% % plot(hip.marJerky)
-% % title('Hip Jerky')
-% % subplot(1,3,3)
-% % plot(hip.marJerkz)
-% % title('Hip Jerkz')
-% 
-% figure(35)
-% subplot(1,3,1)
-% plot(hip.totalmarVel)
-% title('Hip Total Vel')
-% subplot(1,3,2)
-% plot(hip.totalmarAcc)
-% title('Hip Total Acc')
-% subplot(1,3,3)
-% plot(hip.totalmarJerk_abs)
-% title('Hip Total Jerk')
+%% LThigh & RThigh vel, acc, and jerk calculations
+%LThigh individual (x y z) position
+LThigh.marPosx =             segCenter.LThighCenter_mar_dim_frame(1,:);
+LThigh.marPosy =             segCenter.LThighCenter_mar_dim_frame(2,:);
+LThigh.marPosz =             segCenter.LThighCenter_mar_dim_frame(3,:);
+
+%LThigh individual (x y z) velocity
+LThigh.marVelx =             diff(LThigh.marPosx(trial_start_end));
+LThigh.marVely =             diff(LThigh.marPosy(trial_start_end));
+LThigh.marVelz =             diff(LThigh.marPosz(trial_start_end));
+
+%LThigh individual (x y z) acceleration
+LThigh.marAccx =             diff(LThigh.marVelx);
+LThigh.marAccy =             diff(LThigh.marVely);
+LThigh.marAccz =             diff(LThigh.marVelz);
+
+%LThigh individual (x y z) jerk
+LThigh.marJerkx =            diff(LThigh.marAccx);
+LThigh.marJerky =            diff(LThigh.marAccy);
+LThigh.marJerkz =            diff(LThigh.marAccz);
+
+%Total vel, acc, and jerk for LThigh
+LThigh.totalmarVel =         plus(LThigh.marVelx,LThigh.marVely);
+LThigh.totalmarAcc =         diff(LThigh.totalmarVel);
+LThigh.totalmarJerk =        diff(LThigh.totalmarAcc);
+LThigh.totalmarJerk_abs =    abs(LThigh.totalmarJerk);
+
+%RThigh individual (x y z) position
+RThigh.marPosx =             segCenter.RThighCenter_mar_dim_frame(1,:);
+RThigh.marPosy =             segCenter.RThighCenter_mar_dim_frame(2,:);
+RThigh.marPosz =             segCenter.RThighCenter_mar_dim_frame(3,:);
+
+%RThigh individual (x y z)velocity
+RThigh.marVelx =             diff(RThigh.marPosx(trial_start_end));
+RThigh.marVely =             diff(RThigh.marPosy(trial_start_end));
+RThigh.marVelz =             diff(RThigh.marPosz(trial_start_end));
+
+%RThigh individual (x y z) acceleration
+RThigh.marAccx =             diff(RThigh.marVelx);
+RThigh.marAccy =             diff(RThigh.marVely);
+RThigh.marAccz =             diff(RThigh.marVelz);
+
+%RThigh individual (x y z) jerk
+RThigh.marJerkx =            diff(RThigh.marAccx);
+RThigh.marJerky =            diff(RThigh.marAccy);
+RThigh.marJerkz =            diff(RThigh.marAccz);
+
+%Total vel, acc, and jerk for RThigh
+RThigh.totalmarVel =         plus(RThigh.marVelx,RThigh.marVely);
+RThigh.totalmarAcc =         diff(RThigh.totalmarVel);
+RThigh.totalmarJerk =        diff(RThigh.totalmarAcc);
+RThigh.totalmarJerk_abs =    abs(RThigh.totalmarJerk);
+
+%% LLeg & RLeg vel, acc, and jerk calculations
+%LLeg individual (x y z) position
+LLeg.marPosx =             segCenter.LLegCenter_mar_dim_frame(1,:);
+LLeg.marPosy =             segCenter.LLegCenter_mar_dim_frame(2,:);
+LLeg.marPosz =             segCenter.LLegCenter_mar_dim_frame(3,:);
+
+%LLeg individual (x y z) velocity
+LLeg.marVelx =             diff(LLeg.marPosx(trial_start_end));
+LLeg.marVely =             diff(LLeg.marPosy(trial_start_end));
+LLeg.marVelz =             diff(LLeg.marPosz(trial_start_end));
+
+%LLeg individual (x y z) acceleration
+LLeg.marAccx =             diff(LLeg.marVelx);
+LLeg.marAccy =             diff(LLeg.marVely);
+LLeg.marAccz =             diff(LLeg.marVelz);
+
+%LLeg individual (x y z) jerk
+LLeg.marJerkx =            diff(LLeg.marAccx);
+LLeg.marJerky =            diff(LLeg.marAccy);
+LLeg.marJerkz =            diff(LLeg.marAccz);
+
+%Total vel, acc, and jerk for LLeg
+LLeg.totalmarVel =         plus(LLeg.marVelx,LLeg.marVely);
+LLeg.totalmarAcc =         diff(LLeg.totalmarVel);
+LLeg.totalmarJerk =        diff(LLeg.totalmarAcc);
+LLeg.totalmarJerk_abs =    abs(LLeg.totalmarJerk);
+
+%RLeg individual (x y z) position
+RLeg.marPosx =             segCenter.RLegCenter_mar_dim_frame(1,:);
+RLeg.marPosy =             segCenter.RLegCenter_mar_dim_frame(2,:);
+RLeg.marPosz =             segCenter.RLegCenter_mar_dim_frame(3,:);
+
+%RLeg individual (x y z)velocity
+RLeg.marVelx =             diff(RLeg.marPosx(trial_start_end));
+RLeg.marVely =             diff(RLeg.marPosy(trial_start_end));
+RLeg.marVelz =             diff(RLeg.marPosz(trial_start_end));
+
+%RLeg individual (x y z) acceleration
+RLeg.marAccx =             diff(RLeg.marVelx);
+RLeg.marAccy =             diff(RLeg.marVely);
+RLeg.marAccz =             diff(RLeg.marVelz);
+
+%RLeg individual (x y z) jerk
+RLeg.marJerkx =            diff(RLeg.marAccx);
+RLeg.marJerky =            diff(RLeg.marAccy);
+RLeg.marJerkz =            diff(RLeg.marAccz);
+
+%Total vel, acc, and jerk for RLeg
+RLeg.totalmarVel =         plus(RLeg.marVelx,RLeg.marVely);
+RLeg.totalmarAcc =         diff(RLeg.totalmarVel);
+RLeg.totalmarJerk =        diff(RLeg.totalmarAcc);
+RLeg.totalmarJerk_abs =    abs(RLeg.totalmarJerk);
 
 %% LAnkle & RAnkle vel, acc, and jerk calculations
 %LFoot individual (x y z) position
@@ -240,50 +229,6 @@ LFoot.totalmarAcc =         diff(LFoot.totalmarVel);
 LFoot.totalmarJerk =        diff(LFoot.totalmarAcc);
 LFoot.totalmarJerk_abs =    abs(LFoot.totalmarJerk);
 
-% figure(40)
-% subplot(1,3,1)
-% plot(LFoot.marVelx)
-% title('LFoot Velx')
-% subplot(1,3,2)
-% plot(LFoot.marVely)
-% title('LFoot Vely')
-% subplot(1,3,3)
-% plot(LFoot.marVelz)
-% title('LFoot Velz')
-% 
-% figure(41)
-% subplot(1,3,1)
-% plot(LFoot.marAccx)
-% title('LFoot Accx')
-% subplot(1,3,2)
-% plot(LFoot.marAccy)
-% title('LFoot Accy')
-% subplot(1,3,3)
-% plot(LFoot.marAccz)
-% title('LFoot Accz')
-% 
-% % figure(42)
-% % subplot(1,3,1)
-% % plot(LFoot.marJerkx)
-% % title('LFoot Jerkx')
-% % subplot(1,3,2)
-% % plot(LFoot.marJerky)
-% % title('LFoot Jerky')
-% % subplot(1,3,3)
-% % plot(LFoot.marJerkz)
-% % title('LFoot Jerkz')
-% 
-% figure(45)
-% subplot(1,3,1)
-% plot(LFoot.totalmarVel)
-% title('LFoot Total Vel')
-% subplot(1,3,2)
-% plot(LFoot.totalmarAcc)
-% title('LFoot Total Acc')
-% subplot(1,3,3)
-% plot(LFoot.totalmarJerk_abs)
-% title('LFoot Total Jerk')
-
 %RFoot individual (x y z) position
 RFoot.marPosx =             segCenter.RFootCenter_mar_dim_frame(1,:);
 RFoot.marPosy =             segCenter.RFootCenter_mar_dim_frame(2,:);
@@ -310,6 +255,7 @@ RFoot.totalmarAcc =         diff(RFoot.totalmarVel);
 RFoot.totalmarJerk =        diff(RFoot.totalmarAcc);
 RFoot.totalmarJerk_abs =    abs(RFoot.totalmarJerk);
 
+%% Plot marker of interest
 % figure(50)
 % subplot(1,3,1)
 % plot(RFoot.marVelx)
