@@ -13,11 +13,11 @@ hold on
 head_ylim = ylim;
 %toe strike
 for ii = 1:length(rev_step_TO_HS)
-    plot([rev_step_TO_HS(ii,1) rev_step_TO_HS(ii,1)],[head_ylim(1) head_ylim(2)],'b')
+    plot([rev_step_TO_HS(ii,1) rev_step_TO_HS(ii,1)],[head_ylim(1) head_ylim(2)],'Color','b')
 end
 %heel strike
 for ii = 1:length(rev_step_TO_HS)
-    plot([rev_step_TO_HS(ii,2) rev_step_TO_HS(ii,2)],[head_ylim(1) head_ylim(2)],'g')
+    plot([rev_step_TO_HS(ii,2) rev_step_TO_HS(ii,2)],[head_ylim(1) head_ylim(2)],'Color',[0.78 0.18 0.74])
 end
 title('Head Velx')
 
@@ -32,7 +32,7 @@ for ii = 1:length(rev_step_TO_HS)
 end
 %heel strike
 for ii = 1:length(rev_step_TO_HS)
-    plot([rev_step_TO_HS(ii,2) rev_step_TO_HS(ii,2)],[chest_ylim(1) chest_ylim(2)],'g')
+    plot([rev_step_TO_HS(ii,2) rev_step_TO_HS(ii,2)],[chest_ylim(1) chest_ylim(2)],'Color',[0.78 0.18 0.74])
 end
 title('Chest Velx')
 
@@ -47,7 +47,7 @@ for ii = 1:length(rev_step_TO_HS)
 end
 %heel strike
 for ii = 1:length(rev_step_TO_HS)
-    plot([rev_step_TO_HS(ii,2) rev_step_TO_HS(ii,2)],[hip_ylim(1) hip_ylim(2)],'g')
+    plot([rev_step_TO_HS(ii,2) rev_step_TO_HS(ii,2)],[hip_ylim(1) hip_ylim(2)],'Color',[0.78 0.18  0.74])
 end
 title('Hip Velx')
 
@@ -63,7 +63,7 @@ for ii = 1:length(rev_step_TO_HS)
 end
 %heel strike
 for ii = 1:length(rev_step_TO_HS)
-    plot([rev_step_TO_HS(ii,2) rev_step_TO_HS(ii,2)],[thigh_ylim(1) thigh_ylim(2)],'m')
+    plot([rev_step_TO_HS(ii,2) rev_step_TO_HS(ii,2)],[thigh_ylim(1) thigh_ylim(2)],'Color',[0.78 0.18 0.74])
 end
 title('LThigh & RThigh Velx')
 
@@ -79,7 +79,7 @@ for ii = 1:length(rev_step_TO_HS)
 end
 %heel strike
 for ii = 1:length(rev_step_TO_HS)
-    plot([rev_step_TO_HS(ii,2) rev_step_TO_HS(ii,2)],[leg_ylim(1) leg_ylim(2)],'m')
+    plot([rev_step_TO_HS(ii,2) rev_step_TO_HS(ii,2)],[leg_ylim(1) leg_ylim(2)],'Color',[0.78 0.18 0.74])
 end
 title('LLeg & RLeg Velx')
 
@@ -94,7 +94,7 @@ for ii = 1:length(rev_step_TO_HS)
 end
 %heel strike
 for ii = 1:length(rev_step_TO_HS)
-    plot([rev_step_TO_HS(ii,2) rev_step_TO_HS(ii,2)],[foot_ylim(1) foot_ylim(2)],'m')
+    plot([rev_step_TO_HS(ii,2) rev_step_TO_HS(ii,2)],[foot_ylim(1) foot_ylim(2)],'Color',[0.78 0.18 0.74])
 end
 title('LFoot & RFoot Velx')
 
@@ -106,14 +106,14 @@ figure(trialNum+100)
 subplot(3,2,1)
 plot(head.marAccx,'k')
 hold on
-head_ylim = ylim;
+head_acc_ylim = ylim;
 %toe strike
 for ii = 1:length(rev_step_TO_HS)
-    plot([rev_step_TO_HS(ii,1) rev_step_TO_HS(ii,1)],[head_ylim(1) head_ylim(2)],'b')
+    plot([rev_step_TO_HS(ii,1) rev_step_TO_HS(ii,1)],[head_acc_ylim(1) head_acc_ylim(2)],'b')
 end
 %heel strike
 for ii = 1:length(rev_step_TO_HS)
-    plot([rev_step_TO_HS(ii,2) rev_step_TO_HS(ii,2)],[head_ylim(1) head_ylim(2)],'g')
+    plot([rev_step_TO_HS(ii,2) rev_step_TO_HS(ii,2)],[head_acc_ylim(1) head_acc_ylim(2)],'Color',[0.78 0.18  0.74])
 end
 title('Head Accx')
 
@@ -121,14 +121,14 @@ title('Head Accx')
 subplot(3,2,3)
 plot(chest.marAccx,'k')
 hold on
-chest_ylim = ylim;
+chest_acc_ylim = ylim;
 %toe strike
 for ii = 1:length(rev_step_TO_HS)
-    plot([rev_step_TO_HS(ii,1) rev_step_TO_HS(ii,1)],[chest_ylim(1) chest_ylim(2)],'b')
+    plot([rev_step_TO_HS(ii,1) rev_step_TO_HS(ii,1)],[chest_acc_ylim(1) chest_acc_ylim(2)],'b')
 end
 %heel strike
 for ii = 1:length(rev_step_TO_HS)
-    plot([rev_step_TO_HS(ii,2) rev_step_TO_HS(ii,2)],[chest_ylim(1) chest_ylim(2)],'g')
+    plot([rev_step_TO_HS(ii,2) rev_step_TO_HS(ii,2)],[chest_acc_ylim(1) chest_acc_ylim(2)],'Color',[0.78 0.18  0.74])
 end
 title('Chest Accx')
 
@@ -136,14 +136,14 @@ title('Chest Accx')
 subplot(3,2,5)
 plot(hip.marAccx,'k')
 hold on
-hip_ylim = ylim;
+hip_acc_ylim = ylim;
 %toe strike
 for ii = 1:length(rev_step_TO_HS)
-    plot([rev_step_TO_HS(ii,1) rev_step_TO_HS(ii,1)],[hip_ylim(1) hip_ylim(2)],'b')
+    plot([rev_step_TO_HS(ii,1) rev_step_TO_HS(ii,1)],[hip_acc_ylim(1) hip_acc_ylim(2)],'b')
 end
 %heel strike
 for ii = 1:length(rev_step_TO_HS)
-    plot([rev_step_TO_HS(ii,2) rev_step_TO_HS(ii,2)],[hip_ylim(1) hip_ylim(2)],'g')
+    plot([rev_step_TO_HS(ii,2) rev_step_TO_HS(ii,2)],[hip_acc_ylim(1) hip_acc_ylim(2)],'Color',[0.78 0.18  0.74])
 end
 title('Hip Accx')
 
@@ -152,14 +152,14 @@ subplot(3,2,2)
 plot(LThigh.marAccx,'b')
 hold on
 plot(RThigh.marAccx,'r')
-thigh_ylim = ylim;
+thigh_acc_ylim = ylim;
 %toe strike
 for ii = 1:length(rev_step_TO_HS)
-    plot([rev_step_TO_HS(ii,1) rev_step_TO_HS(ii,1)],[thigh_ylim(1) thigh_ylim(2)],'k')
+    plot([rev_step_TO_HS(ii,1) rev_step_TO_HS(ii,1)],[thigh_acc_ylim(1) thigh_acc_ylim(2)],'k')
 end
 %heel strike
 for ii = 1:length(rev_step_TO_HS)
-    plot([rev_step_TO_HS(ii,2) rev_step_TO_HS(ii,2)],[thigh_ylim(1) thigh_ylim(2)],'m')
+    plot([rev_step_TO_HS(ii,2) rev_step_TO_HS(ii,2)],[thigh_acc_ylim(1) thigh_acc_ylim(2)],'Color',[0.78 0.18 0.74])
 end
 title('LThigh & RThigh Accx')
 
@@ -168,14 +168,14 @@ subplot(3,2,4)
 plot(LLeg.marAccx,'b')
 hold on
 plot(RLeg.marAccx,'r')
-leg_ylim = ylim;
+leg_acc_ylim = ylim;
 %toe strike
 for ii = 1:length(rev_step_TO_HS)
-    plot([rev_step_TO_HS(ii,1) rev_step_TO_HS(ii,1)],[leg_ylim(1) leg_ylim(2)],'k')
+    plot([rev_step_TO_HS(ii,1) rev_step_TO_HS(ii,1)],[leg_acc_ylim(1) leg_acc_ylim(2)],'k')
 end
 %heel strike
 for ii = 1:length(rev_step_TO_HS)
-    plot([rev_step_TO_HS(ii,2) rev_step_TO_HS(ii,2)],[leg_ylim(1) leg_ylim(2)],'m')
+    plot([rev_step_TO_HS(ii,2) rev_step_TO_HS(ii,2)],[leg_acc_ylim(1) leg_acc_ylim(2)],'Color',[0.78 0.18 0.74])
 end
 title('LLeg & RLeg Accx')
 
@@ -184,13 +184,13 @@ subplot(3,2,6)
 plot(LFoot.marAccx,'b')
 hold on
 plot(RFoot.marAccx,'r')
-foot_ylim = ylim;
+foot_acc_ylim = ylim;
 for ii = 1:length(rev_step_TO_HS)
-    plot([rev_step_TO_HS(ii,1) rev_step_TO_HS(ii,1)],[foot_ylim(1) foot_ylim(2)],'k')
+    plot([rev_step_TO_HS(ii,1) rev_step_TO_HS(ii,1)],[foot_acc_ylim(1) foot_acc_ylim(2)],'k')
 end
 %heel strike
 for ii = 1:length(rev_step_TO_HS)
-    plot([rev_step_TO_HS(ii,2) rev_step_TO_HS(ii,2)],[foot_ylim(1) foot_ylim(2)],'m')
+    plot([rev_step_TO_HS(ii,2) rev_step_TO_HS(ii,2)],[foot_acc_ylim(1) foot_acc_ylim(2)],'Color',[0.78 0.18 0.74])
 end
 title('LFoot & RFoot Accx')
 
